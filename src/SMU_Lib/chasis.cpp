@@ -112,10 +112,12 @@ void PMDTurnTo(double rtn, double r, double kp, double vmin, double offset){
 
         if(r>0){
             if(fabs(lv) >= 100) SpinLR(Sign(cv) * 100, Sign(cv) * 100 * (r-ChasisWidth/2)/(r+ChasisWidth/2));
+            else if(fabs(rv) < vmin) SpinLR(Sign(cv) * vmin * (r+ChasisWidth/2)/(r-ChasisWidth/2), Sign(cv) * vmin);
             else SpinLR(lv, rv);
         }
         else{
             if(fabs(rv) >= 100) SpinLR(Sign(cv) * 100 * (r+ChasisWidth/2)/(r-ChasisWidth/2), Sign(cv) * 100);
+            else if(fabs(lv) < vmin) SpinLR(Sign(cv) * vmin, Sign(cv) * vmin * (r-ChasisWidth/2)/(r+ChasisWidth/2));
             else SpinLR(lv, rv);
         }
 
@@ -154,3 +156,28 @@ void PIDGo(double target, double kp, double ki, double kd, double startI, double
     Stop(hold);
 }
 
+void PIDDTurnTo(double rtn, double r, double kp, double ki, double kd, double startI, double offset){
+    ResetPosition();
+    double temp, cv, rv, lv, lastError = 0.0, integral = startI;
+    while(1){
+        temp = rtn - GR.rotation();
+        if (fabs(temp) <= offset) break;
+        integral += temp;
+        cv = kp * temp + ki * integral + kd * (temp - lastError);
+        lastError = temp;
+
+        rv = cv * (r-ChasisWidth/2)/r;
+        lv = cv * (r+ChasisWidth/2)/r;
+
+        if(r>0){
+            if(fabs(lv) >= 100) SpinLR(Sign(cv) * 100, Sign(cv) * 100 * (r-ChasisWidth/2)/(r+ChasisWidth/2));
+            else SpinLR(lv, rv);
+        }
+        else{
+            if(fabs(rv) >= 100) SpinLR(Sign(cv) * 100 * (r+ChasisWidth/2)/(r-ChasisWidth/2), Sign(cv) * 100);
+            else SpinLR(lv, rv);
+        }
+        
+    }
+    Stop(hold);
+}
