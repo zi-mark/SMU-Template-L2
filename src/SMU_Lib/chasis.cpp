@@ -37,6 +37,23 @@ void Spin_T(double v, double t){
     task::sleep(t);
     Stop();
 }
+
+//内置编码器直走
+void Go(double target, double v, velocityUnits vu){
+    target = target * 360 / (2 * Pi * WheelRadius * ChasisRatio);
+    for(int i = 0; i < Chassis_Count; i++){
+        LMs[i].spinFor(target, deg, v, vu, 0);
+        RMs[i].spinFor(target, deg, v, vu, 0);
+    }
+    bool finish = 1;
+    while(finish){
+        for(int i = 0; i < Chassis_Count; i++){
+            finish *= !LMs[i].isDone() * !RMs[i].isDone();
+        }
+    }
+    Stop(hold);
+}
+
 //PM转绝对角度
 void PMTurnTo(double target, double kp, double vmin, double offset){
     double temp, v;
@@ -93,26 +110,47 @@ void PMDTurnTo(double rtn, double r, double kp, double vmin, double offset){
         rv = cv * (r-ChasisWidth/2)/r;
         lv = cv * (r+ChasisWidth/2)/r;
 
-        if(r > 0){
-            if(fabs(lv) >= 3600) SpinLR(Sign(lv)*3600, Sign(rv)*3600*(r-ChasisWidth/2)/(r+ChasisWidth/2), dps);
-            else if(fabs(rv) <= vmin) SpinLR(Sign(lv)*vmin*(r+ChasisWidth/2)/(r-ChasisWidth/2), Sign(rv)*vmin, dps);
-            else SpinLR(lv, rv, dps);
+        if(r>0){
+            if(fabs(lv) >= 100) SpinLR(Sign(cv) * 100, Sign(cv) * 100 * (r-ChasisWidth/2)/(r+ChasisWidth/2));
+            else SpinLR(lv, rv);
         }
+        else{
+            if(fabs(rv) >= 100) SpinLR(Sign(cv) * 100 * (r+ChasisWidth/2)/(r-ChasisWidth/2), Sign(cv) * 100);
+            else SpinLR(lv, rv);
+        }
+
     }
     Stop(hold);
 }
-//内置编码器直走
-void Go(double target, double v, velocityUnits vu){
+
+void PIDTurnTo(double target, double kp, double ki, double kd, double startI, double offset){
+    ResetPosition();
+    double temp, v, lastError = 0.0, integral = startI;
+    while(1){
+        temp = target - GR.rotation();
+        if (fabs(temp) <= offset) break;
+        integral += temp;
+        v = kp * temp + ki * integral + kd * (temp - lastError);
+        lastError = temp;
+
+        SpinLR(v, -v, dps);
+    }
+    Stop(hold);
+}
+
+void PIDGo(double target, double kp, double ki, double kd, double startI, double offset){
+    ResetPosition();
+    double temp, v, lastError = 0.0, integral = startI;
     target = target * 360 / (2 * Pi * WheelRadius * ChasisRatio);
-    for(int i = 0; i < Chassis_Count; i++){
-        LMs[i].spinFor(target, deg, v, vu, 0);
-        RMs[i].spinFor(target, deg, v, vu, 0);
-    }
-    bool finish = 1;
-    while(finish){
-        for(int i = 0; i < Chassis_Count; i++){
-            finish *= !LMs[i].isDone() * !RMs[i].isDone();
-        }
+    while(1){
+        temp = target - AverPosition(deg);
+        if(fabs(temp) < offset) break;
+        integral += temp;
+        v = kp * temp + ki * integral + kd * (temp - lastError);
+        lastError = temp;
+
+        SpinLR(v, v, dps);
     }
     Stop(hold);
 }
+
