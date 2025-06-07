@@ -9,7 +9,7 @@ double AverPosition(rotationUnits ru);
 void Spin_T(double v, double t);
 
 void Go(double target, double v = 90, velocityUnits vu = velocityUnits::pct);
-void Turn();
+void TurnFor(double target, double v = 90, velocityUnits vu = velocityUnits::pct);
 
 struct PM{
     double kp;
@@ -34,9 +34,12 @@ extern PID PIDT;
 extern PID PIDDT;
 
 extern void PMTurnTo(double target, double kp = PMT.kp, double vmin = PMT.vmin, double offset = PMT.offset);
+extern void PMTurnFor(double target, double kp = PMT.kp, double vmin = PMT.vmin, double offset = PMT.offset);
 extern void PMDTurnTo(double rtn, double r, double kp = PMDT.kp, double vmin = PMDT.vmin, double offset = PMDT.offset);
+extern void PMDTurnFor(double rtn, double r, double kp = PMDT.kp, double vmin = PMDT.vmin, double offset = PMDT.offset);
 extern void PMGo(double target, double kp = PMG.kp, double vmin = PMG.vmin, double offset = PMG.offset);
 
 extern void PIDTurnTo(double target, double kp = PIDT.kp, double ki = PIDT.ki, double kd = PIDT.kd, double startI = PIDT.startI, double offset = PIDT.offset);
 extern void PIDDTurnTo(double rtn, double r, double kp = PIDDT.kp, double ki = PIDDT.ki, double kd = PIDDT.kd, double startI = PIDDT.startI, double offset = PIDDT.offset);
+extern void PIDDTurnFor(double rtn, double r, double kp = PIDDT.kp, double ki = PIDDT.ki, double kd = PIDDT.kd, double startI = PIDDT.startI, double offset = PIDDT.offset);
 extern void PIDGo(double target, double kp = PIDG.kp, double ki = PIDG.ki, double kd = PIDG.kd, double startI = PIDG.startI, double offset = PIDG.offset);

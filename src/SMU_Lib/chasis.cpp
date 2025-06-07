@@ -54,6 +54,22 @@ void Go(double target, double v, velocityUnits vu){
     Stop(hold);
 }
 
+void TurnFor(double target, double v, velocityUnits vu){
+    target = target * ChasisWidth / (2 * WheelRadius * ChasisRatio);
+    for(int i = 0; i < Chassis_Count; i++){
+        LMs[i].spinFor(target, deg, v, vu, false);
+        RMs[i].spinFor(-target, deg, v, vu, false);
+    }
+    bool finish = 1;
+    while(finish){
+        for(int i = 0; i < Chassis_Count; i++){
+            finish *= !LMs[i].isDone() * !RMs[i].isDone();
+        }
+    }
+    Stop(hold);
+
+}
+
 //PM转绝对角度
 void PMTurnTo(double target, double kp, double vmin, double offset){
     double temp, v;
@@ -76,6 +92,32 @@ void PMTurnTo(double target, double kp, double vmin, double offset){
     }
     Stop(hold);
 }
+
+//PM转相对角度
+void PMTurnFor(double target, double kp, double vmin, double offset){
+    double temp, v;
+    target = target + GR.rotation();
+    while(1){
+        temp = target - GR.rotation();
+        if (fabs(temp) <= offset) break;
+        v = kp * temp;
+        if(v < -vmin || v > vmin){
+            SpinLR(v, -v, dps);
+            Brain.Screen.clearScreen(red);
+        }
+        else if(v < 0){
+            SpinLR(-vmin, vmin, dps);
+            Brain.Screen.clearScreen(green);
+        }
+        else{
+            SpinLR(vmin, -vmin, dps);
+            Brain.Screen.clearScreen(blue);
+        }
+    }
+    Stop(hold);
+}
+
+
 //PM直走
 void PMGo(double target, double kp, double vmin, double offset){
     ResetPosition();
@@ -100,9 +142,36 @@ void PMGo(double target, double kp, double vmin, double offset){
     }
     Stop(hold);
 }
+
 //PM差速转
 void PMDTurnTo(double rtn, double r, double kp, double vmin, double offset){
     double temp, cv, rv, lv;
+    while(1){
+        temp = rtn - GR.rotation();
+        if (fabs(temp) <= offset) break;
+        cv = kp * temp;
+        rv = cv * (r-ChasisWidth/2)/r;
+        lv = cv * (r+ChasisWidth/2)/r;
+
+        if(r>0){
+            if(fabs(lv) >= 100) SpinLR(Sign(cv) * 100, Sign(cv) * 100 * (r-ChasisWidth/2)/(r+ChasisWidth/2));
+            else if(fabs(rv) < vmin) SpinLR(Sign(cv) * vmin * (r+ChasisWidth/2)/(r-ChasisWidth/2), Sign(cv) * vmin);
+            else SpinLR(lv, rv);
+        }
+        else{
+            if(fabs(rv) >= 100) SpinLR(Sign(cv) * 100 * (r+ChasisWidth/2)/(r-ChasisWidth/2), Sign(cv) * 100);
+            else if(fabs(lv) < vmin) SpinLR(Sign(cv) * vmin, Sign(cv) * vmin * (r-ChasisWidth/2)/(r+ChasisWidth/2));
+            else SpinLR(lv, rv);
+        }
+
+    }
+    Stop(hold);
+}
+
+//PM差速转
+void PMDTurnFor(double rtn, double r, double kp, double vmin, double offset){
+    double temp, cv, rv, lv;
+    rtn = rtn + GR.rotation();
     while(1){
         temp = rtn - GR.rotation();
         if (fabs(temp) <= offset) break;
@@ -140,6 +209,21 @@ void PIDTurnTo(double target, double kp, double ki, double kd, double startI, do
     Stop(hold);
 }
 
+void PIDTurnFor(double target, double kp, double ki, double kd, double startI, double offset){
+    double temp, v, lastError = 0.0, integral = startI;
+    target = target + GR.rotation();
+    while(1){
+        temp = target - GR.rotation();
+        if (fabs(temp) <= offset) break;
+        integral += temp;
+        v = kp * temp + ki * integral + kd * (temp - lastError);
+        lastError = temp;
+
+        SpinLR(v, -v, dps);
+    }
+    Stop(hold);
+}
+
 void PIDGo(double target, double kp, double ki, double kd, double startI, double offset){
     ResetPosition();
     double temp, v, lastError = 0.0, integral = startI;
@@ -157,8 +241,33 @@ void PIDGo(double target, double kp, double ki, double kd, double startI, double
 }
 
 void PIDDTurnTo(double rtn, double r, double kp, double ki, double kd, double startI, double offset){
-    ResetPosition();
     double temp, cv, rv, lv, lastError = 0.0, integral = startI;
+    while(1){
+        temp = rtn - GR.rotation();
+        if (fabs(temp) <= offset) break;
+        integral += temp;
+        cv = kp * temp + ki * integral + kd * (temp - lastError);
+        lastError = temp;
+
+        rv = cv * (r-ChasisWidth/2)/r;
+        lv = cv * (r+ChasisWidth/2)/r;
+
+        if(r>0){
+            if(fabs(lv) >= 100) SpinLR(Sign(cv) * 100, Sign(cv) * 100 * (r-ChasisWidth/2)/(r+ChasisWidth/2));
+            else SpinLR(lv, rv);
+        }
+        else{
+            if(fabs(rv) >= 100) SpinLR(Sign(cv) * 100 * (r+ChasisWidth/2)/(r-ChasisWidth/2), Sign(cv) * 100);
+            else SpinLR(lv, rv);
+        }
+        
+    }
+    Stop(hold);
+}
+
+void PIDDTurnFor(double rtn, double r, double kp, double ki, double kd, double startI, double offset){
+    double temp, cv, rv, lv, lastError = 0.0, integral = startI;
+    rtn = rtn + GR.rotation();
     while(1){
         temp = rtn - GR.rotation();
         if (fabs(temp) <= offset) break;
