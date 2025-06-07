@@ -1,12 +1,10 @@
 #include "SMU_Lib/chasis.h" 
 //赋予底盘左右速度
 void SpinLR(double lv, double rv, vex::velocityUnits vu){
-
     for(int i = 0; i < Chassis_Count; i++){
         LMs[i].spin(fwd, lv, vu);
         RMs[i].spin(fwd, rv, vu);
     }
-
 }
 //令底盘停止
 void Stop(brakeType bt){
@@ -54,6 +52,7 @@ void Go(double target, double v, velocityUnits vu){
     Stop(hold);
 }
 
+//内置编码器转相对角度
 void TurnFor(double target, double v, velocityUnits vu){
     target = target * ChasisWidth / (2 * WheelRadius * ChasisRatio);
     for(int i = 0; i < Chassis_Count; i++){
@@ -72,11 +71,11 @@ void TurnFor(double target, double v, velocityUnits vu){
 
 //PM转绝对角度
 void PMTurnTo(double target, double kp, double vmin, double offset){
-    double temp, v;
+    double error, v;
     while(1){
-        temp = target - GR.rotation();
-        if (fabs(temp) <= offset) break;
-        v = kp * temp;
+        error = target - GR.rotation();
+        if (fabs(error) <= offset) break;
+        v = kp * error;
         if(v < -vmin || v > vmin){
             SpinLR(v, -v, dps);
             Brain.Screen.clearScreen(red);
@@ -95,12 +94,12 @@ void PMTurnTo(double target, double kp, double vmin, double offset){
 
 //PM转相对角度
 void PMTurnFor(double target, double kp, double vmin, double offset){
-    double temp, v;
+    double error, v;
     target = target + GR.rotation();
     while(1){
-        temp = target - GR.rotation();
-        if (fabs(temp) <= offset) break;
-        v = kp * temp;
+        error = target - GR.rotation();
+        if (fabs(error) <= offset) break;
+        v = kp * error;
         if(v < -vmin || v > vmin){
             SpinLR(v, -v, dps);
             Brain.Screen.clearScreen(red);
@@ -121,12 +120,12 @@ void PMTurnFor(double target, double kp, double vmin, double offset){
 //PM直走
 void PMGo(double target, double kp, double vmin, double offset){
     ResetPosition();
-    double temp, v;
+    double error, v;
     target = target * 360 / (2 * Pi * WheelRadius * ChasisRatio);
     while(1){
-        temp = target - AverPosition(deg);
-        if(fabs(temp) < offset) break;
-        v = kp * temp;
+        error = target - AverPosition(deg);
+        if(fabs(error) < offset) break;
+        v = kp * error;
         if(v < -vmin || v > vmin){
             SpinLR(v,v, dps);
             Brain.Screen.clearScreen(red);
@@ -145,11 +144,11 @@ void PMGo(double target, double kp, double vmin, double offset){
 
 //PM差速转
 void PMDTurnTo(double rtn, double r, double kp, double vmin, double offset){
-    double temp, cv, rv, lv;
+    double error, cv, rv, lv;
     while(1){
-        temp = rtn - GR.rotation();
-        if (fabs(temp) <= offset) break;
-        cv = kp * temp;
+        error = rtn - GR.rotation();
+        if (fabs(error) <= offset) break;
+        cv = kp * error;
         rv = cv * (r-ChasisWidth/2)/r;
         lv = cv * (r+ChasisWidth/2)/r;
 
@@ -170,12 +169,12 @@ void PMDTurnTo(double rtn, double r, double kp, double vmin, double offset){
 
 //PM差速转
 void PMDTurnFor(double rtn, double r, double kp, double vmin, double offset){
-    double temp, cv, rv, lv;
+    double error, cv, rv, lv;
     rtn = rtn + GR.rotation();
     while(1){
-        temp = rtn - GR.rotation();
-        if (fabs(temp) <= offset) break;
-        cv = kp * temp;
+        error = rtn - GR.rotation();
+        if (fabs(error) <= offset) break;
+        cv = kp * error;
         rv = cv * (r-ChasisWidth/2)/r;
         lv = cv * (r+ChasisWidth/2)/r;
 
@@ -196,13 +195,13 @@ void PMDTurnFor(double rtn, double r, double kp, double vmin, double offset){
 
 void PIDTurnTo(double target, double kp, double ki, double kd, double startI, double offset){
     ResetPosition();
-    double temp, v, lastError = 0.0, integral = startI;
+    double error, v, lastError = 0.0, integral = startI;
     while(1){
-        temp = target - GR.rotation();
-        if (fabs(temp) <= offset) break;
-        integral += temp;
-        v = kp * temp + ki * integral + kd * (temp - lastError);
-        lastError = temp;
+        error = target - GR.rotation();
+        if (fabs(error) <= offset) break;
+        integral += error;
+        v = kp * error + ki * integral + kd * (error - lastError);
+        lastError = error;
 
         SpinLR(v, -v, dps);
     }
@@ -210,14 +209,14 @@ void PIDTurnTo(double target, double kp, double ki, double kd, double startI, do
 }
 
 void PIDTurnFor(double target, double kp, double ki, double kd, double startI, double offset){
-    double temp, v, lastError = 0.0, integral = startI;
+    double error, v, lastError = 0.0, integral = startI;
     target = target + GR.rotation();
     while(1){
-        temp = target - GR.rotation();
-        if (fabs(temp) <= offset) break;
-        integral += temp;
-        v = kp * temp + ki * integral + kd * (temp - lastError);
-        lastError = temp;
+        error = target - GR.rotation();
+        if (fabs(error) <= offset) break;
+        integral += error;
+        v = kp * error + ki * integral + kd * (error - lastError);
+        lastError = error;
 
         SpinLR(v, -v, dps);
     }
@@ -226,14 +225,14 @@ void PIDTurnFor(double target, double kp, double ki, double kd, double startI, d
 
 void PIDGo(double target, double kp, double ki, double kd, double startI, double offset){
     ResetPosition();
-    double temp, v, lastError = 0.0, integral = startI;
+    double error, v, lastError = 0.0, integral = startI;
     target = target * 360 / (2 * Pi * WheelRadius * ChasisRatio);
     while(1){
-        temp = target - AverPosition(deg);
-        if(fabs(temp) < offset) break;
-        integral += temp;
-        v = kp * temp + ki * integral + kd * (temp - lastError);
-        lastError = temp;
+        error = target - AverPosition(deg);
+        if(fabs(error) < offset) break;
+        integral += error;
+        v = kp * error + ki * integral + kd * (error - lastError);
+        lastError = error;
 
         SpinLR(v, v, dps);
     }
@@ -241,13 +240,13 @@ void PIDGo(double target, double kp, double ki, double kd, double startI, double
 }
 
 void PIDDTurnTo(double rtn, double r, double kp, double ki, double kd, double startI, double offset){
-    double temp, cv, rv, lv, lastError = 0.0, integral = startI;
+    double error, cv, rv, lv, lastError = 0.0, integral = startI;
     while(1){
-        temp = rtn - GR.rotation();
-        if (fabs(temp) <= offset) break;
-        integral += temp;
-        cv = kp * temp + ki * integral + kd * (temp - lastError);
-        lastError = temp;
+        error = rtn - GR.rotation();
+        if (fabs(error) <= offset) break;
+        integral += error;
+        cv = kp * error + ki * integral + kd * (error - lastError);
+        lastError = error;
 
         rv = cv * (r-ChasisWidth/2)/r;
         lv = cv * (r+ChasisWidth/2)/r;
@@ -266,14 +265,14 @@ void PIDDTurnTo(double rtn, double r, double kp, double ki, double kd, double st
 }
 
 void PIDDTurnFor(double rtn, double r, double kp, double ki, double kd, double startI, double offset){
-    double temp, cv, rv, lv, lastError = 0.0, integral = startI;
+    double error, cv, rv, lv, lastError = 0.0, integral = startI;
     rtn = rtn + GR.rotation();
     while(1){
-        temp = rtn - GR.rotation();
-        if (fabs(temp) <= offset) break;
-        integral += temp;
-        cv = kp * temp + ki * integral + kd * (temp - lastError);
-        lastError = temp;
+        error = rtn - GR.rotation();
+        if (fabs(error) <= offset) break;
+        integral += error;
+        cv = kp * error + ki * integral + kd * (error - lastError);
+        lastError = error;
 
         rv = cv * (r-ChasisWidth/2)/r;
         lv = cv * (r+ChasisWidth/2)/r;

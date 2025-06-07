@@ -49,11 +49,11 @@ using namespace vex;
     int Suck_Count = 2;
     motor Sucks[] = {Suck, Suck2};
 
-    //惯性传感器(端口);
+    //惯性传感器(端口)
     inertial GR(PORT21);
     optical CLSensor(PORT20);
 
-    //电磁阀(三线接口);
+    //电磁阀(三线接口)
     digital_out Hook(Brain.ThreeWirePort.A);
     
     #endif

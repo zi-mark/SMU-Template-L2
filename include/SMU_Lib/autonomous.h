@@ -4,7 +4,8 @@ void Init();
 void ProgramChoosing();
 
 extern int ProgramChoice;
-const int MaxChoice = 16;
+#define MaxChoice 16
+// const int MaxChoice = 16;
 //
 void Break();
 void RR();
@@ -29,5 +30,4 @@ struct Autos{
     int color;
 };
 
-
-extern Autos Auto[];
+extern Autos Auto[MaxChoice];

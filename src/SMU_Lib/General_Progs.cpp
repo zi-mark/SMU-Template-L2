@@ -136,14 +136,14 @@ void Change_Groups(int Motor_Group, int *Motor_Count, motor** Motor_Groups){
 void Motor_Test(){
     Con.Screen.clearScreen();
     motor* Motor_Groups = LMs;
-    int Motor_Choice = 1, Motor_Count = Chassis_Count, Motor_Number = 0, MaxChoice = 4;
+    int Motor_Choice = 1, Motor_Count = Chassis_Count, Motor_Number = 0, MaxMotorGroup = 4;
     bool UpSave = 1, DownSave = 1, LeftSave = 1, RightSave = 1;
     Change_Groups(Motor_Choice, &Motor_Count, &Motor_Groups);
         while(1){
             if(Con.ButtonUp.pressing()){
                 if(UpSave){
                     UpSave = 0;
-                    Motor_Choice = Motor_Choice==MaxChoice ? 1 : Motor_Choice+1;
+                    Motor_Choice = Motor_Choice==MaxMotorGroup ? 1 : Motor_Choice+1;
                     Change_Groups(Motor_Choice, &Motor_Count, &Motor_Groups);
                 }
             }
@@ -152,7 +152,7 @@ void Motor_Test(){
             if(Con.ButtonDown.pressing()){
                 if(DownSave){
                     DownSave = 0;
-                    Motor_Choice = Motor_Choice==1 ? MaxChoice : Motor_Choice-1;
+                    Motor_Choice = Motor_Choice==1 ? MaxMotorGroup : Motor_Choice-1;
                     Change_Groups(Motor_Choice, &Motor_Count, &Motor_Groups);
                 }
             }
@@ -187,7 +187,7 @@ void Motor_Test(){
 }
 
 //自动函数与函数名链接
-Autos Auto[]{
+Autos Auto[MaxChoice]{
     {"DC ", &DC, 1}, 
     {"RR ", &RR, 1}, 
     {"RR2 ", &RR2, 1},

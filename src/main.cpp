@@ -37,6 +37,7 @@ timer Auto_T;
 
 int main(){
     Brain.Screen.clearScreen();
+    if(Com.isDriverControl()) Com.drivercontrol(DC);
     #ifndef Testing
     ProgramChoosing();
     #endif
