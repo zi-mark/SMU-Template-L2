@@ -63,7 +63,8 @@ int main(){
     Auto_T.reset();
 
     Test();
-    
+
+    Con.Screen.newLine();
     Con.Screen.print(Auto_T.value());
     DC();
     #endif

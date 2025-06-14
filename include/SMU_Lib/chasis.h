@@ -1,13 +1,6 @@
 #include "robot-config.h"
 #include "definer.h"
 
-void SpinLR(double lv, double rv, vex::velocityUnits vu = velocityUnits::pct);
-void Stop(vex::brakeType bt = vex::brakeType::hold);
-void ResetPosition();
-double AverPosition(rotationUnits ru);
-
-void Spin_T(double v, double t);
-
 void Go(double target, double v = 90, velocityUnits vu = velocityUnits::pct);
 void TurnFor(double target, double v = 90, velocityUnits vu = velocityUnits::pct);
 

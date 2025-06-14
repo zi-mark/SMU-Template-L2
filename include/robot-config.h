@@ -1,4 +1,5 @@
 #include "vex.h"
+#include "SMU_Lib/motor_groups.h"
 
 #define Pi 3.14159265358979323846
 
@@ -8,15 +9,12 @@ extern brain Brain;
 extern controller Con;
 extern competition Com;
 
-extern int Chassis_Count;
-extern motor RMs[];
-extern motor LMs[];
+extern MotorGroups RMs;
+extern MotorGroups LMs;
 
-extern int Suck_Count;
-extern motor Sucks[];
+extern MotorGroups Sucks;
 
-extern int Lift_Count;
-extern motor Lifts[];
+extern MotorGroups Lifts;
 
 extern digital_out Hook;
 

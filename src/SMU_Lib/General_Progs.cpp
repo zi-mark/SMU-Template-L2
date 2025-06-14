@@ -49,16 +49,18 @@ void Test(){
 
     while(1){
         if(Con.ButtonUp.pressing()){
-            ResetPosition();
+            LMs.ResetPosition();
+            RMs.ResetPosition();
             PMGo(24);
             Brain.Screen.newLine();
-            Brain.Screen.print(AverPosition(deg));
+            Brain.Screen.print((LMs.AveragePosition(deg) + RMs.AveragePosition(deg)) / 2);
         }
         else if(Con.ButtonDown.pressing()){
-            ResetPosition();
+            LMs.ResetPosition();
+            RMs.ResetPosition();
             PMGo(-24);
             Brain.Screen.newLine();
-            Brain.Screen.print(AverPosition(deg));
+            Brain.Screen.print((LMs.AveragePosition(deg) + RMs.AveragePosition(deg)) / 2);
         }
         else if(Con.ButtonA.pressing()){
             PMTurnTo(90);
@@ -96,94 +98,11 @@ void Test(){
     
 }
 
-//MT专属
-void Change_Groups(int Motor_Group, int *Motor_Count, motor** Motor_Groups){
-        switch (Motor_Group)
-        {
-        case 1:
-            *Motor_Groups = LMs;
-            *Motor_Count = Chassis_Count;
-            Con.Screen.clearLine(1);
-            Con.Screen.setCursor(1,1);
-            Con.Screen.print("LMs");
-            break;
-        case 2:
-            *Motor_Groups = RMs;
-            *Motor_Count = Chassis_Count;
-            Con.Screen.clearLine(1);
-            Con.Screen.setCursor(1,1);
-            Con.Screen.print("RMs");
-            break;
-        case 3:
-            *Motor_Groups = Sucks;
-            *Motor_Count = Suck_Count;
-            Con.Screen.clearLine(1);
-            Con.Screen.setCursor(1,1);
-            Con.Screen.print("Sucks");
-            break;
-        case 4:
-            *Motor_Groups = Lifts;
-            *Motor_Count = Lift_Count;
-            Con.Screen.clearLine(1);
-            Con.Screen.setCursor(1,1);
-            Con.Screen.print("Lifts");
-        default:
-            break;
-        }
-}
+
 
 //MT程序主体
 void Motor_Test(){
-    Con.Screen.clearScreen();
-    motor* Motor_Groups = LMs;
-    int Motor_Choice = 1, Motor_Count = Chassis_Count, Motor_Number = 0, MaxMotorGroup = 4;
-    bool UpSave = 1, DownSave = 1, LeftSave = 1, RightSave = 1;
-    Change_Groups(Motor_Choice, &Motor_Count, &Motor_Groups);
-        while(1){
-            if(Con.ButtonUp.pressing()){
-                if(UpSave){
-                    UpSave = 0;
-                    Motor_Choice = Motor_Choice==MaxMotorGroup ? 1 : Motor_Choice+1;
-                    Change_Groups(Motor_Choice, &Motor_Count, &Motor_Groups);
-                }
-            }
-            else UpSave = 1;
-
-            if(Con.ButtonDown.pressing()){
-                if(DownSave){
-                    DownSave = 0;
-                    Motor_Choice = Motor_Choice==1 ? MaxMotorGroup : Motor_Choice-1;
-                    Change_Groups(Motor_Choice, &Motor_Count, &Motor_Groups);
-                }
-            }
-            else DownSave = 1;
-
-            if(Con.ButtonLeft.pressing()){
-                if(LeftSave){
-                    LeftSave = 0;
-                    Motor_Number = Motor_Number==0 ? Motor_Count-1 : Motor_Number-1;
-                    Con.Screen.clearLine(2);
-                    Con.Screen.setCursor(2,1);
-                    Con.Screen.print(Motor_Number);
-                }
-            }
-            else LeftSave = 1;
-
-            if(Con.ButtonRight.pressing()){
-                if(RightSave){
-                    RightSave = 0;
-                    Motor_Number = Motor_Number==Motor_Count-1 ? 0 : Motor_Number+1;
-                    Con.Screen.clearLine(2);
-                    Con.Screen.setCursor(2,1);
-                    Con.Screen.print(Motor_Number);
-                }
-            }
-            else RightSave = 1;
-
-            if(Con.ButtonA.pressing()) Motor_Groups[Motor_Number].spin(fwd, 100, pct);
-            else if(Con.ButtonB.pressing()) Motor_Groups[Motor_Number].spin(fwd, -100, pct);
-            else Motor_Groups[Motor_Number].stop(coast);
-        }
+    
 }
 
 //自动函数与函数名链接
