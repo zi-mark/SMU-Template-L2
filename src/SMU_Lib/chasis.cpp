@@ -1,7 +1,12 @@
 #include "SMU_Lib/chasis.h" 
-//赋予底盘左右速度
 
-//直走一段时间
+void Spin_T(double t, double speed, velocityUnits velUnits){
+    LMs.Spin(speed, velUnits);
+    RMs.Spin(speed, velUnits);
+    task::sleep(t);
+    LMs.Stop(hold);
+    RMs.Stop(hold);
+}
 
 //内置编码器直走
 void Go(double target, double v, velocityUnits vu){

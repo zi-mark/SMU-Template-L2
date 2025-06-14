@@ -1,6 +1,8 @@
 #include "robot-config.h"
 #include "definer.h"
 
+void Spin_T(double t, double speed = 90, velocityUnits velUnits = velocityUnits::pct);
+
 void Go(double target, double v = 90, velocityUnits vu = velocityUnits::pct);
 void TurnFor(double target, double v = 90, velocityUnits vu = velocityUnits::pct);
 
