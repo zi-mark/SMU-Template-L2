@@ -1,4 +1,3 @@
-#include "vex.h"
 #include "SMU_Lib/PressureButton.h"
 
 PressureButton::PressureButton(vex::controller::button btn) : button(btn), save(false) {}

@@ -1,5 +1,5 @@
 #include "vex.h"
-#include "SMU_Lib/motor_groups.h"
+#include "SMU_Lib/motor_group.h"
 
 #define Pi 3.14159265358979323846
 

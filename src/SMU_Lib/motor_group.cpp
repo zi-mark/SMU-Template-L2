@@ -1,6 +1,4 @@
-#include "SMU_Lib/motor_groups.h"
-#include "definer.h"
-#include "robot-config.h"
+#include "SMU_Lib/motor_group.h"
 
 MotorGroup::MotorGroup(vex::motor* motor, int count, const char name[]) {
     motorGroup = motor;
