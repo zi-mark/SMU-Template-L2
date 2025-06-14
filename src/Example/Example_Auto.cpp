@@ -38,3 +38,23 @@
 
 #endif
 
+//自动函数与函数名链接
+Autos Auto[MaxChoice]{
+    {"DC ", nullptr, 1},
+    {"RR ", &RR, 1}, 
+    {"RR2 ", &RR2, 1},
+    {"RR3 ", &RR3, 1},
+    {"RL ", &RL, 1}, 
+    {"RL2 ", &RL2, 1}, 
+    {"RL3 ", &RL3, 1}, 
+    {"BL ", &BL, 0},
+    {"BL2 ", &BL2, 0}, 
+    {"BL3 ", &BL3, 0},
+    {"BR ", &BR, 0},
+    {"BR2 ", &BR2, 0},
+    {"BR3 ", &BR3, 0},
+    {"SK ", &Skills, 1},
+    {"Test", &Test, 1},
+    {"MT ", &Motor_Test, 1}
+};
+

@@ -2,31 +2,35 @@
 #include "definer.h"
 #include "robot-config.h"
 
-MotorGroups::MotorGroups(vex::motor* motor, int count, const char name[]) {
+MotorGroup::MotorGroup(vex::motor* motor, int count, const char name[]) {
     motorGroup = motor;
     motorCount = count;
     groupName = name;
 }
 
-void MotorGroups::Spin(double speed, vex::velocityUnits units) {
+vex::motor* MotorGroup::Motors() { return motorGroup; }
+int MotorGroup::Count() { return motorCount; }
+const char* MotorGroup::Name() { return groupName; }
+
+void MotorGroup::Spin(double speed, vex::velocityUnits units) {
     for (int i = 0; i < motorCount; i++) {
         motorGroup[i].spin(fwd, speed, units);
     }
 }
 
-void MotorGroups::Stop(vex::brakeType brakeType) {
+void MotorGroup::Stop(vex::brakeType brakeType) {
     for (int i = 0; i < motorCount; i++) {
         motorGroup[i].stop(brakeType);
     }
 }
 
-void MotorGroups::ResetPosition() {
+void MotorGroup::ResetPosition() {
     for (int i = 0; i < motorCount; i++) {
         motorGroup[i].resetPosition();
     }
 }
 
-double MotorGroups::AveragePosition(vex::rotationUnits units) {
+double MotorGroup::AveragePosition(vex::rotationUnits units) {
     double positionSum = 0.0;
     for (int i = 0; i < motorCount; i++) {
         positionSum += motorGroup[i].position(units);
@@ -34,7 +38,7 @@ double MotorGroups::AveragePosition(vex::rotationUnits units) {
     return positionSum / motorCount;
 }
 
-void MotorGroups::Spin_T(double t, double speed, vex::velocityUnits velUnits) {
+void MotorGroup::Spin_T(double t, double speed, vex::velocityUnits velUnits) {
     for (int i = 0; i < motorCount; i++) {
         motorGroup[i].spin(fwd, speed, velUnits);
     }
@@ -42,7 +46,7 @@ void MotorGroups::Spin_T(double t, double speed, vex::velocityUnits velUnits) {
     Stop();
 }
 
-bool MotorGroups::isDone() {
+bool MotorGroup::isDone() {
     for (int i = 0; i < motorCount; i++) {
         if (!motorGroup[i].isDone()) {
             return false;
@@ -51,7 +55,7 @@ bool MotorGroups::isDone() {
     return true;
 }
 
-void MotorGroups::SpinFor(double rotation, vex::rotationUnits units, double speed, vex::velocityUnits velUnits, bool wait) {
+void MotorGroup::SpinFor(double rotation, vex::rotationUnits units, double speed, vex::velocityUnits velUnits, bool wait) {
     for (int i = 0; i < motorCount; i++) {
         motorGroup[i].spinFor(rotation, units, speed, velUnits, false);
     }

@@ -3,6 +3,7 @@
 #include "definer.h"
 #include "SMU_Lib/chasis.h"
 #include "SMU_Lib/functional.h"
+#include "SMU_Lib/PressureButton.h"
 
 //测自动断点
 void Break(){
@@ -98,29 +99,56 @@ void Test(){
     
 }
 
-
+void PrintMotorGroups(int Group_Num, int Motor_Num){
+    Con.Screen.clearScreen();
+    Con.Screen.setCursor(1,1);
+    Con.Screen.print(MotorGroups[Group_Num].Name());
+    Con.Screen.print(" ");
+    Con.Screen.print(Motor_Num + 1);
+}
+    
 
 //MT程序主体
 void Motor_Test(){
-    
+
+    int Group_Num = 0, Motor_Num = 0;
+    PressureButton BtnL(Con.ButtonLeft);
+    PressureButton BtnR(Con.ButtonRight);
+    PressureButton BtnU(Con.ButtonUp);
+    PressureButton BtnD(Con.ButtonDown);
+    PrintMotorGroups(Group_Num, Motor_Num);
+    while(1){
+        
+        if(BtnR.JustPressed()){
+            Motor_Num++;
+            if(Motor_Num >= MotorGroups[Group_Num].Count()) Motor_Num = 0;
+            PrintMotorGroups(Group_Num, Motor_Num);
+        }
+        else if(BtnL.JustPressed()){
+            Motor_Num--;
+            if(Motor_Num <= -1) Motor_Num =  MotorGroups[Group_Num].Count() - 1;
+            PrintMotorGroups(Group_Num, Motor_Num);
+        }
+        else if(BtnU.JustPressed()){
+            Group_Num++;
+            if(Group_Num >= MotorGroupsCount) Group_Num = 0;
+            if(Motor_Num >= MotorGroups[Group_Num].Count()) Motor_Num = 0;
+            Motor_Num = 0;
+            PrintMotorGroups(Group_Num, Motor_Num);
+        }
+        else if(BtnD.JustPressed()){
+            Group_Num--;
+            if(Group_Num <= -1) Group_Num = MotorGroupsCount - 1;
+            if(Motor_Num >= MotorGroups[Group_Num].Count()) Motor_Num = 0;
+            PrintMotorGroups(Group_Num, Motor_Num);
+        }
+        task::sleep(100);
+        if(Con.ButtonA.pressing()) MotorGroups[Group_Num].Motors()[Motor_Num].spin(forward, 100, pct);
+        else if(Con.ButtonB.pressing()) MotorGroups[Group_Num].Motors()[Motor_Num].spin(reverse, 100, pct);
+        else MotorGroups[Group_Num].Motors()[Motor_Num].stop(coast);
+    }
+
+
 }
 
-//自动函数与函数名链接
-Autos Auto[MaxChoice]{
-    {"DC ", &DC, 1}, 
-    {"RR ", &RR, 1}, 
-    {"RR2 ", &RR2, 1},
-    {"RR3 ", &RR3, 1},
-    {"RL ", &RL, 1}, 
-    {"RL2 ", &RL2, 1}, 
-    {"RL3 ", &RL3, 1}, 
-    {"BL ", &BL, 0},
-    {"BL2 ", &BL2, 0}, 
-    {"BL3 ", &BL3, 0},
-    {"BR ", &BR, 0},
-    {"BR2 ", &BR2, 0},
-    {"BR3 ", &BR3, 0},
-    {"SK ", &Skills, 1},
-    {"Test", &Test, 1},
-    {"MT ", &Motor_Test, 1}
-};
+

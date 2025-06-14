@@ -19,8 +19,8 @@ using namespace vex;
     motor Left_Motors[] = {L1, L2, L3};
     motor Right_Motors[] = {R1, R2, R3};
 
-    MotorGroups LMs(Left_Motors, 3, "LMs");
-    MotorGroups RMs(Right_Motors, 3, "RMs");
+    MotorGroup LMs(Left_Motors, 3, "LMs");
+    MotorGroup RMs(Right_Motors, 3, "RMs");
 
     //轮子半径和齿轮比 马达齿/轮子齿
     double WheelRadius = 1.375;
@@ -38,13 +38,16 @@ using namespace vex;
     // motor Lift(PORT10, ratio36_1, 0);
 
     motor Lift_Motors[] = {LiftL, LiftR};
-    MotorGroups Lifts(Lift_Motors, 2, "Lifts");
+    MotorGroup Lifts(Lift_Motors, 2, "Lifts");
 
     motor Suck(PORT20, ratio6_1, 1);
     motor Suck2(PORT11, ratio6_1, 0);
 
     motor Suck_Motors[] = {Suck, Suck2};
-    MotorGroups Sucks(Suck_Motors, 2, "Sucks");
+    MotorGroup Sucks(Suck_Motors, 2, "Sucks");
+
+    MotorGroup MotorGroups[] = {LMs, RMs, Lifts, Sucks};
+    int MotorGroupsCount = 4;
 
     //惯性传感器(端口)
     inertial GR(PORT21);

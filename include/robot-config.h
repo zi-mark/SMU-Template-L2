@@ -9,12 +9,15 @@ extern brain Brain;
 extern controller Con;
 extern competition Com;
 
-extern MotorGroups RMs;
-extern MotorGroups LMs;
+extern MotorGroup RMs;
+extern MotorGroup LMs;
 
-extern MotorGroups Sucks;
+extern MotorGroup Sucks;
 
-extern MotorGroups Lifts;
+extern MotorGroup Lifts;
+
+extern MotorGroup MotorGroups[];
+extern int MotorGroupsCount;
 
 extern digital_out Hook;
 
