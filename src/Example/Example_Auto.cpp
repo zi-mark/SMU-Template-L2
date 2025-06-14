@@ -39,7 +39,8 @@
 #endif
 
 //自动函数与函数名链接
-Autos Auto[MaxChoice]{
+int MaxChoice = 16; 
+Autos Auto[]{
     {"DC ", nullptr, 1},
     {"RR ", &RR, 1}, 
     {"RR2 ", &RR2, 1},
@@ -57,4 +58,5 @@ Autos Auto[MaxChoice]{
     {"Test", &Test, 1},
     {"MT ", &Motor_Test, 1}
 };
+
 
