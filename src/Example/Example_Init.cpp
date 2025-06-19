@@ -15,11 +15,10 @@
     #else 
     void Init(){
 
-        GR.calibrate();
-        LMs.ResetPosition();
-        RMs.ResetPosition();
+        CH.GR->calibrate();
+        ResetPosition();
 
-        while(GR.isCalibrating()) continue;
+        while(CH.GR->isCalibrating()) continue;
     }
     #endif
 #endif
