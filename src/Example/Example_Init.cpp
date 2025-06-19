@@ -7,11 +7,10 @@
     #if Exam == 1
     void Init(){
         
-        GR.calibrate();
-        
-        
-        while(GR.isCalibrating()) continue;
-        
+        CH.GR->calibrate();
+
+        while(CH.GR->isCalibrating()) continue;
+
     }
     #else 
     void Init(){

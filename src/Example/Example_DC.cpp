@@ -10,7 +10,7 @@
 
     #if Exam == 1
     void DC(){
-    // CH.Stop();
+    Stop(coast);
     Brain.Screen.clearScreen(black);
         while(1){
 
@@ -27,7 +27,6 @@
             if(abs(lv) < 5) lv = 0;
             if(abs(rv) < 5) rv = 0;
             SpinLR(lv, rv);
-            Brain.Screen.setCursor(1,1);
 
         }
     }
@@ -50,8 +49,7 @@
 
             if(abs(lv) < 5) lv = 0;
             if(abs(rv) < 5) rv = 0;
-            LMs.Spin(lv, pct);
-            RMs.Spin(rv, pct);
+            SpinLR(lv, rv);
 
         }
     }

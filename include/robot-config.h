@@ -18,7 +18,6 @@ extern int MotorGroupsCount;
 
 extern digital_out Hook;
 
-extern inertial GR;
 extern optical CLSensor;
 
 extern thread CL;

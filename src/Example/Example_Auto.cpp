@@ -41,7 +41,7 @@
 //自动函数与函数名链接
 int MaxChoice = 16; 
 Autos Auto[]{
-    {"DC ", nullptr, 1},
+    {"DC ", nullptr, 1},//默认第一个是手动
     {"RR ", &RR, 1}, 
     {"RR2 ", &RR2, 1},
     {"RR3 ", &RR3, 1},
