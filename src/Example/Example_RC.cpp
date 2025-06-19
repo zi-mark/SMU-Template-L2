@@ -1,6 +1,5 @@
 #include "robot-config.h"
 #include "definer.h"
-#include "SMU_Lib/chasis.h"
 
 using namespace vex;
 
@@ -19,19 +18,33 @@ using namespace vex;
     motor Left_Motors[] = {L1, L2, L3};
     motor Right_Motors[] = {R1, R2, R3};
 
-    MotorGroup LMs(Left_Motors, 3, "LMs");
-    MotorGroup RMs(Right_Motors, 3, "RMs");
+    MotorGroup Left_Motor_Group(Left_Motors, 3, "LMs");
+    MotorGroup Right_Motor_Group(Right_Motors, 3, "RMs");
 
     //轮子半径和齿轮比 马达齿/轮子齿
     double WheelRadius = 1.375;
     double ChasisRatio = 1;
     double ChasisWidth = 7.5;
 
-    //自动参数调整
-    PM PMT{12, 110, 1};
-    PM PMG{1.9, 100, 25};
-    PM PMDT{25, 200, 1};
-    
+    inertial GR(PORT21);
+
+    ChassisData CH = {
+        Left_Motors,// 左侧马达组
+        Right_Motors,// 右侧马达组
+        &GR,// 惯性传感器
+        &Brain.Screen,// 显示屏
+        3,// 轮子数量
+        WheelRadius,// 轮子半径
+        ChasisRatio,// 齿轮比 马达/轮子齿
+        ChasisWidth,// 车身宽度
+        {0.5, 10.0, 0.5}, // PMG: kp, ki, kd
+        {0.5, 10.0, 0.5}, // PMT: kp, ki, kd
+        {0.5, 10.0, 0.5}, // PMDT: kp, ki, kd
+        {0.1, 0.01, 0.001, 0.1, 0}, // PIDG: kp, ki, kd, startI, offset
+        {0.1, 0.01, 0.001, 0.1, 0}, // PIDT: kp, ki, kd, startI, offset
+        {0.1, 0.01, 0.001, 0.1, 0} // PIDDT: kp, ki, kd, startI, offset
+    };
+
 
     motor LiftL(PORT19, ratio36_1, 1);
     motor LiftR(PORT12, ratio36_1, 0);
@@ -46,11 +59,10 @@ using namespace vex;
     motor Suck_Motors[] = {Suck, Suck2};
     MotorGroup Sucks(Suck_Motors, 2, "Sucks");
 
-    MotorGroup MotorGroups[] = {LMs, RMs, Lifts, Sucks};
+    MotorGroup MotorGroups[] = {Left_Motor_Group, Right_Motor_Group, Lifts, Sucks};
     int MotorGroupsCount = 4;
 
     //惯性传感器(端口)
-    inertial GR(PORT21);
     optical CLSensor(PORT20);
 
     //电磁阀(三线接口)

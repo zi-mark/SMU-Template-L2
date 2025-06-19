@@ -8,8 +8,7 @@
     void Init(){
         
         GR.calibrate();
-        LMs.ResetPosition();
-        RMs.ResetPosition();
+        
         
         while(GR.isCalibrating()) continue;
         

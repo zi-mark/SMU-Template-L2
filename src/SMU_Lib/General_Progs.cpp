@@ -50,21 +50,19 @@ void Test(){
 
     while(1){
         if(Con.ButtonUp.pressing()){
-            LMs.ResetPosition();
-            RMs.ResetPosition();
-            PMGo(24);
+            // CH.ResetPosition();
+            // CH.PMGo(24);
             Brain.Screen.newLine();
-            Brain.Screen.print((LMs.AveragePosition(deg) + RMs.AveragePosition(deg)) / 2);
+            // Brain.Screen.print(CH.AveragePosition(deg));
         }
         else if(Con.ButtonDown.pressing()){
-            LMs.ResetPosition();
-            RMs.ResetPosition();
-            PMGo(-24);
+            // CH.ResetPosition();
+            // CH.PMGo(-24);
             Brain.Screen.newLine();
-            Brain.Screen.print((LMs.AveragePosition(deg) + RMs.AveragePosition(deg)) / 2);
+            // Brain.Screen.print(CH.AveragePosition(deg));
         }
         else if(Con.ButtonA.pressing()){
-            PMTurnTo(90);
+            // CH.PMTurnTo(90);
             Brain.Screen.newLine();
             Brain.Screen.print(GR.rotation());
             task::sleep(3000);
@@ -72,7 +70,7 @@ void Test(){
             Brain.Screen.print(GR.rotation());
         }
         else if(Con.ButtonY.pressing()){
-            PMTurnTo(-90);
+            // CH.PMTurnTo(-90);
             Brain.Screen.newLine();
             Brain.Screen.print(GR.rotation());
             task::sleep(3000);
@@ -80,7 +78,7 @@ void Test(){
             Brain.Screen.print(GR.rotation());
         }
         else if(Con.ButtonX.pressing()){
-            PMTurnTo(0);
+            // CH.PMTurnTo(0);
             Brain.Screen.newLine();
             Brain.Screen.print(GR.rotation());
             task::sleep(3000);
@@ -88,7 +86,7 @@ void Test(){
             Brain.Screen.print(GR.rotation());
         }
         else if(Con.ButtonB.pressing()){
-            PMTurnTo(180);
+            // CH.PMTurnTo(180);
             Brain.Screen.newLine();
             Brain.Screen.print(GR.rotation());
             task::sleep(3000);

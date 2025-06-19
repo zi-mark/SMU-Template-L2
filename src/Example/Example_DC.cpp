@@ -10,8 +10,7 @@
 
     #if Exam == 1
     void DC(){
-    LMs.Stop(coast);
-    RMs.Stop(coast);
+    // CH.Stop();
     Brain.Screen.clearScreen(black);
         while(1){
 
@@ -27,8 +26,8 @@
 
             if(abs(lv) < 5) lv = 0;
             if(abs(rv) < 5) rv = 0;
-            LMs.Spin(lv, velocityUnits::pct);
-            RMs.Spin(rv, velocityUnits::pct);
+            SpinLR(lv, rv);
+            Brain.Screen.setCursor(1,1);
 
         }
     }
