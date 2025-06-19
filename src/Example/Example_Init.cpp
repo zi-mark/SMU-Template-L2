@@ -8,6 +8,7 @@
     void Init(){
         
         CH.GR->calibrate();
+        ResetPosition();
 
         while(CH.GR->isCalibrating()) continue;
 
