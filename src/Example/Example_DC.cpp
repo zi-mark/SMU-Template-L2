@@ -27,8 +27,6 @@
             if(abs(rv) < 5) rv = 0;
             SpinLR(lv, rv);
 
-            if(Con.ButtonR1.pressing()){}
-
         }
     }
     #else

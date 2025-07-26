@@ -1,4 +1,4 @@
-#define Exam 1
+#define KL 1
 /*
 * Exam:
 * 1: 12345A

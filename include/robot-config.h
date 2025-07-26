@@ -10,6 +10,7 @@ extern controller Con;
 extern competition Com;
 
 extern MotorGroup Sucks;
+extern MotorGroup Sucks2;
 
 extern MotorGroup Lifts;
 
