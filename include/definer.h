@@ -9,5 +9,5 @@
 #define DriversHabit 1
 
 //测试模式
-// #define Testing
+#define Testing
 

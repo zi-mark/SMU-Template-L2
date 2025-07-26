@@ -7,6 +7,7 @@ extern int ProgramChoice;
 // #define MaxChoice 16
 //
 void Break();
+
 void RR();
 void RR2();
 void RR3();
@@ -21,6 +22,7 @@ void BL2();
 void BL3();
 void Skills();
 void Motor_Test();
+void Auto_Test();
 void Test();
 void Empty();
 

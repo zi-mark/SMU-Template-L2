@@ -1,4 +1,5 @@
 #include "SMU_Lib/autonomous.h"
+#include "SMU_Lib/functional.h"
 #include "robot-config.h"
 #include "SMU_Lib/PressureButton.h"
 
@@ -10,6 +11,10 @@ void Break(){
 }
 
 void Empty(){};
+
+void Test(){
+    Auto_Sorting(1);
+}
 
 int ProgramChoice = 0;
 //屏幕选程序
@@ -45,7 +50,7 @@ void ProgramChoosing(){
 }
 
 //测试函数
-void Test(){
+void Auto_Test(){
 
     while(1){
         if(Con.ButtonUp.pressing()){

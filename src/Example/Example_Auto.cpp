@@ -52,7 +52,7 @@
         {"BR2 ", BR2, 0},
         {"BR3 ", BR3, 0},
         {"SK ", Skills, 1},
-        {"Test", Test, 1},
+        {"AT", Auto_Test, 1},
         {"MT ", Motor_Test, 1}
     };
 

@@ -48,13 +48,15 @@ timer Auto_T;
 
 int main(){
     Brain.Screen.clearScreen();
-    if(Com.isDriverControl()) Com.drivercontrol(DC);
+    if(Com.isCompetitionSwitch() || Com.isFieldControl()){
+        Com.drivercontrol(DC);
+    }
     #ifndef Testing
     ProgramChoosing();
     Init();
 
     if(Com.isCompetitionSwitch() || Com.isFieldControl()){
-        Com.drivercontrol(DC);
+        // Com.drivercontrol(DC);
         Com.autonomous(Auto[ProgramChoice].Funcs);
         Con.Screen.print("Competition ");
     }
