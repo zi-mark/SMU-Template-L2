@@ -54,13 +54,16 @@ using namespace vex;
     MotorGroup Lifts(Lift_Motors, 2, "Lifts");
 
     motor Suck(PORT20, ratio6_1, 1);
-    motor Suck2(PORT11, ratio6_1, 0);
+    motor Suck2(PORT11, ratio6_1, 1);
 
-    motor Suck_Motors[] = {Suck, Suck2};
-    MotorGroup Sucks(Suck_Motors, 2, "Sucks");
+    motor Suck_Motors[] = {Suck};
+    MotorGroup Sucks(Suck_Motors, 1, "Sucks");
 
-    MotorGroup MotorGroups[] = {Left_Motor_Group, Right_Motor_Group, Lifts, Sucks};
-    int MotorGroupsCount = 4;
+    motor Suck_Motors2[] = {Suck2};
+    MotorGroup Sucks2(Suck_Motors2, 1, "Sucks2");
+
+    MotorGroup MotorGroups[] = {Left_Motor_Group, Right_Motor_Group, Lifts, Sucks, Sucks2};
+    int MotorGroupsCount = 5;
 
     //惯性传感器(端口)
     optical CLSensor(PORT20);

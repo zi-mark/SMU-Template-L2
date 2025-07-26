@@ -1,4 +1,5 @@
 #include "SMU_Lib/autonomous.h"
+#include "robot-config.h"
 #include "SMU_Lib/PressureButton.h"
 
 //测自动断点
@@ -7,6 +8,8 @@ void Break(){
     while(!Con.ButtonA.pressing()) continue;
     }
 }
+
+void Empty(){};
 
 int ProgramChoice = 0;
 //屏幕选程序

@@ -22,6 +22,7 @@ void BL3();
 void Skills();
 void Motor_Test();
 void Test();
+void Empty();
 
 struct Autos{
     const char* name;
