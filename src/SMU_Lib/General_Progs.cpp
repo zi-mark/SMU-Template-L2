@@ -13,7 +13,7 @@ void Break(){
 void Empty(){};
 
 void Test(){
-    Auto_Sorting(1);
+    // DC_Sorting(1);
 }
 
 int ProgramChoice = 0;

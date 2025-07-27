@@ -1,5 +1,6 @@
 #include "vex.h"
 #include "SMU_Lib/motor_group.h"
+#include "SMU_Lib/functional.h"
 #include "SMU_Lib/chasis.h"
 
 
@@ -21,5 +22,6 @@ extern digital_out Hook;
 extern digital_out Tongue;
 
 extern optical CLSensor;
+extern ColorData CLData;
 
 extern thread CL;

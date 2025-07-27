@@ -1,40 +1,29 @@
 #include "SMU_Lib/functional.h"
 #include "robot-config.h"
 
-void Auto_Sorting(bool color) {
+void DC_Sorting(bool color, int red_offset, int blue_offset) {
     while(1){
-        // if(CLSensor.isNearObject()){
             if(color) {
-                if(CLSensor.hue() > 160){
+                if(CLSensor.hue() > blue_offset){
                     Sucks2.Spin(-100);
                     task::sleep(20);
                 }
-                else if(CLSensor.hue() < 60){
+                else if(CLSensor.hue() < red_offset){
                     Sucks2.Spin(100);
                     Sucks.Spin(100);
                     task::sleep(20);
                 }
-                else{
-                    // Sucks2.Stop();
-                }
             }
             else {
-                if(CLSensor.hue() < 50){
+                if(CLSensor.hue() < red_offset){
                     Sucks2.Spin(-100);
                     task::sleep(300);
                 }
-                else if(CLSensor.hue() > 170){
+                else if(CLSensor.hue() > blue_offset){
                     Sucks2.Spin(100);
                     task::sleep(300);
                 }
-                else{
-                    // Sucks2.Stop();
-                }
             }
-        // }
-        // else{
-        //     Sucks2.Stop();
-        // }
 
         if(Con.ButtonR1.pressing()){
             Sucks.Spin(100);
@@ -56,7 +45,7 @@ void Auto_Sorting(bool color) {
             Sucks2.Stop();
         }
 
-        // task::sleep(10);
+        task::sleep(5);
         printf("Hue: %f\n", CLSensor.hue());
     } 
 }
