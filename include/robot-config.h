@@ -18,6 +18,7 @@ extern MotorGroup MotorGroups[];
 extern int MotorGroupsCount;
 
 extern digital_out Hook;
+extern digital_out Tongue;
 
 extern optical CLSensor;
 

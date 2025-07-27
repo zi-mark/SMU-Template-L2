@@ -5,17 +5,17 @@ void Auto_Sorting(bool color) {
     while(1){
         // if(CLSensor.isNearObject()){
             if(color) {
-                if(CLSensor.hue() > 170){
+                if(CLSensor.hue() > 160){
                     Sucks2.Spin(-100);
-                    task::sleep(50);
+                    task::sleep(20);
                 }
-                else if(CLSensor.hue() < 50){
+                else if(CLSensor.hue() < 60){
                     Sucks2.Spin(100);
                     Sucks.Spin(100);
-                    task::sleep(50);
+                    task::sleep(20);
                 }
                 else{
-                    Sucks2.Stop();
+                    // Sucks2.Stop();
                 }
             }
             else {
@@ -28,7 +28,7 @@ void Auto_Sorting(bool color) {
                     task::sleep(300);
                 }
                 else{
-                    Sucks2.Stop();
+                    // Sucks2.Stop();
                 }
             }
         // }
@@ -56,7 +56,7 @@ void Auto_Sorting(bool color) {
             Sucks2.Stop();
         }
 
-        task::sleep(10);
+        // task::sleep(10);
         printf("Hue: %f\n", CLSensor.hue());
     } 
 }
