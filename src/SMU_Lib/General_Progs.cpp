@@ -1,8 +1,6 @@
 #include "SMU_Lib/autonomous.h"
-#include "SMU_Lib/drivercontrol.h"
-#include "definer.h"
-#include "SMU_Lib/chasis.h"
 #include "SMU_Lib/functional.h"
+#include "robot-config.h"
 #include "SMU_Lib/PressureButton.h"
 
 //测自动断点
@@ -10,6 +8,12 @@ void Break(){
     if(!Com.isFieldControl() && !Com.isCompetitionSwitch()){
     while(!Con.ButtonA.pressing()) continue;
     }
+}
+
+void Empty(){};
+
+void Test(){
+    Auto_Sorting(1);
 }
 
 int ProgramChoice = 0;
@@ -46,54 +50,52 @@ void ProgramChoosing(){
 }
 
 //测试函数
-void Test(){
+void Auto_Test(){
 
     while(1){
         if(Con.ButtonUp.pressing()){
-            LMs.ResetPosition();
-            RMs.ResetPosition();
+            ResetPosition();
             PMGo(24);
             Brain.Screen.newLine();
-            Brain.Screen.print((LMs.AveragePosition(deg) + RMs.AveragePosition(deg)) / 2);
+            Brain.Screen.print(AveragePosition(deg));
         }
         else if(Con.ButtonDown.pressing()){
-            LMs.ResetPosition();
-            RMs.ResetPosition();
+            ResetPosition();
             PMGo(-24);
             Brain.Screen.newLine();
-            Brain.Screen.print((LMs.AveragePosition(deg) + RMs.AveragePosition(deg)) / 2);
+            Brain.Screen.print(AveragePosition(deg));
         }
         else if(Con.ButtonA.pressing()){
             PMTurnTo(90);
             Brain.Screen.newLine();
-            Brain.Screen.print(GR.rotation());
+            Brain.Screen.print(CH.GR->rotation());
             task::sleep(3000);
             Brain.Screen.newLine();
-            Brain.Screen.print(GR.rotation());
+            Brain.Screen.print(CH.GR->rotation());
         }
         else if(Con.ButtonY.pressing()){
             PMTurnTo(-90);
             Brain.Screen.newLine();
-            Brain.Screen.print(GR.rotation());
+            Brain.Screen.print(CH.GR->rotation());
             task::sleep(3000);
             Brain.Screen.newLine();
-            Brain.Screen.print(GR.rotation());
+            Brain.Screen.print(CH.GR->rotation());
         }
         else if(Con.ButtonX.pressing()){
             PMTurnTo(0);
             Brain.Screen.newLine();
-            Brain.Screen.print(GR.rotation());
+            Brain.Screen.print(CH.GR->rotation());
             task::sleep(3000);
             Brain.Screen.newLine();
-            Brain.Screen.print(GR.rotation());
+            Brain.Screen.print(CH.GR->rotation());
         }
         else if(Con.ButtonB.pressing()){
             PMTurnTo(180);
             Brain.Screen.newLine();
-            Brain.Screen.print(GR.rotation());
+            Brain.Screen.print(CH.GR->rotation());
             task::sleep(3000);
             Brain.Screen.newLine();
-            Brain.Screen.print(GR.rotation());
+            Brain.Screen.print(CH.GR->rotation());
         }
     }
     
@@ -116,7 +118,9 @@ void Motor_Test(){
     PressureButton BtnR(Con.ButtonRight);
     PressureButton BtnU(Con.ButtonUp);
     PressureButton BtnD(Con.ButtonDown);
+
     PrintMotorGroups(Group_Num, Motor_Num);
+
     while(1){
         
         if(BtnR.JustPressed()){

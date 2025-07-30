@@ -48,14 +48,15 @@ timer Auto_T;
 
 int main(){
     Brain.Screen.clearScreen();
-    if(Com.isDriverControl()) Com.drivercontrol(DC);
-    #ifndef Testing
-    ProgramChoosing();
-    #endif
-    Init();
-    #ifndef Testing
     if(Com.isCompetitionSwitch() || Com.isFieldControl()){
         Com.drivercontrol(DC);
+    }
+    #ifndef Testing
+    ProgramChoosing();
+    Init();
+
+    if(Com.isCompetitionSwitch() || Com.isFieldControl()){
+        // Com.drivercontrol(DC);
         Com.autonomous(Auto[ProgramChoice].Funcs);
         Con.Screen.print("Competition ");
     }
@@ -68,8 +69,10 @@ int main(){
         Con.Screen.print(Auto_T.value());
         DC();
     }
+
     #else
-    Con.Screen.print("Init Compelete");
+    Init();
+    Con.Screen.print("Init Compelete | Press A to start"); 
     while(!Con.ButtonA.pressing()) continue;
     Auto_T.reset();
 
@@ -80,5 +83,5 @@ int main(){
     DC();
     #endif
     
- while(1) wait(10,msec);
+    while(1) wait(10,msec);
 }

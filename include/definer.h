@@ -1,4 +1,4 @@
-#define Exam 1
+#define KL 1
 /*
 * Exam:
 * 1: 12345A
@@ -9,4 +9,5 @@
 #define DriversHabit 1
 
 //测试模式
-// #define Testing
+#define Testing
+

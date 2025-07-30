@@ -4,7 +4,6 @@
 #include "SMU_Lib/functional.h"
 
 #ifdef Exam
-
     #if Exam == 1
 
         void RR(){}
@@ -36,27 +35,26 @@
         void Skills(){}
     #endif
 
+    //自动函数与函数名链接
+    int MaxChoice = 16; 
+    Autos Auto[]{
+        {"DC ", Empty, 1},//默认第一个是手动
+        {"RR ", RR, 1}, 
+        {"RR2 ", RR2, 1},
+        {"RR3 ", RR3, 1},
+        {"RL ", RL, 1}, 
+        {"RL2 ", RL2, 1}, 
+        {"RL3 ", RL3, 1}, 
+        {"BL ", BL, 0},
+        {"BL2 ", BL2, 0}, 
+        {"BL3 ", BL3, 0},
+        {"BR ", BR, 0},
+        {"BR2 ", BR2, 0},
+        {"BR3 ", BR3, 0},
+        {"SK ", Skills, 1},
+        {"AT", Auto_Test, 1},
+        {"MT ", Motor_Test, 1}
+    };
+
 #endif
-
-//自动函数与函数名链接
-int MaxChoice = 16; 
-Autos Auto[]{
-    {"DC ", nullptr, 1},
-    {"RR ", &RR, 1}, 
-    {"RR2 ", &RR2, 1},
-    {"RR3 ", &RR3, 1},
-    {"RL ", &RL, 1}, 
-    {"RL2 ", &RL2, 1}, 
-    {"RL3 ", &RL3, 1}, 
-    {"BL ", &BL, 0},
-    {"BL2 ", &BL2, 0}, 
-    {"BL3 ", &BL3, 0},
-    {"BR ", &BR, 0},
-    {"BR2 ", &BR2, 0},
-    {"BR3 ", &BR3, 0},
-    {"SK ", &Skills, 1},
-    {"Test", &Test, 1},
-    {"MT ", &Motor_Test, 1}
-};
-
 

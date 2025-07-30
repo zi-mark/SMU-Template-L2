@@ -7,21 +7,19 @@
     #if Exam == 1
     void Init(){
         
-        GR.calibrate();
-        LMs.ResetPosition();
-        RMs.ResetPosition();
-        
-        while(GR.isCalibrating()) continue;
-        
+        CH.GR->calibrate();
+        ResetPosition();
+
+        while(CH.GR->isCalibrating()) continue;
+
     }
     #else 
     void Init(){
 
-        GR.calibrate();
-        LMs.ResetPosition();
-        RMs.ResetPosition();
+        CH.GR->calibrate();
+        ResetPosition();
 
-        while(GR.isCalibrating()) continue;
+        while(CH.GR->isCalibrating()) continue;
     }
     #endif
 #endif
