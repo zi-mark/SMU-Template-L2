@@ -12,6 +12,7 @@ extern competition Com;
 
 extern MotorGroup Sucks;
 extern MotorGroup Sucks2;
+extern MotorGroup Sucks3;
 
 extern MotorGroup Lifts;
 

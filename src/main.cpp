@@ -58,6 +58,7 @@ int main(){
         // Com.drivercontrol(DC);
         Com.autonomous(Auto[ProgramChoice].Funcs);
         Con.Screen.print("Competition ");
+        Con.rumble("-");
     }
     else{
         Con.Screen.print("Not Competition ");

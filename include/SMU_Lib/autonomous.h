@@ -8,6 +8,7 @@ extern int ProgramChoice;
 //
 void Break();
 
+void R1();
 void RR();
 void RR2();
 void RR3();
