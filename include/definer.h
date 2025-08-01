@@ -1,4 +1,4 @@
-#define KL 3
+#define KL 1
 /*
 * Exam:
 * 1: 12345A
@@ -10,7 +10,7 @@
 */
 
 //单杆/双杆
-#define DriversHabit 2
+#define DriversHabit 1
 
 //测试模式
 // #define Testing

@@ -5,6 +5,7 @@ struct ColorData {
     int blue_offset;
     double right_duration;
     double false_duration;
+    int light_power;
 };
 extern void DC_Sorting(bool color);
 extern void Auto_Sorting(bool color);
