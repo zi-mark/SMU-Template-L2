@@ -1,4 +1,4 @@
-#define KL 1
+#define KL 3
 /*
 * Exam:
 * 1: 12345A
@@ -7,10 +7,12 @@
 * 1: First Gen
 * 2: 61150W
 * 3: Jie
+* 4: aoteman
+* 5: 61150W new
 */
 
 //单杆/双杆
-#define DriversHabit 1
+#define DriversHabit 2
 
 //测试模式
 // #define Testing
