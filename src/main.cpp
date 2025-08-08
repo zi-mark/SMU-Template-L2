@@ -73,13 +73,13 @@ int main(){
     #else
     Init();
     Con.Screen.print("Init Complete");
-    while(!Con.ButtonA.pressing()) continue;
-    Auto_T.reset();
+    // while(!Con.ButtonA.pressing()) continue;
+    // Auto_T.reset();
 
-    Test();
+    Auto_Test();
 
-    Con.Screen.newLine();
-    Con.Screen.print(Auto_T.value());
+    // Con.Screen.newLine();
+    // Con.Screen.print(Auto_T.value());
     DC();
     #endif
     

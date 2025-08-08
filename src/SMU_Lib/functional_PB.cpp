@@ -49,3 +49,33 @@ void DC_Sorting(bool color, int red_offset, int blue_offset) {
         printf("Hue: %f\n", CLSensor.hue());
     } 
 }
+
+void Eat(){
+    Sucks.Spin(100);
+    Sucks2.Spin(100);
+    Sucks3.Spin(100);
+}
+
+void Low_Goal(){
+    Sucks.Spin(-100);
+    Sucks2.Spin(-100);
+    Sucks3.Spin(-100);
+}
+
+void High_Goal(){
+    Sucks.Spin(100);
+    Sucks2.Spin(-100);
+    Sucks3.Spin(-100);
+}
+
+void Long_Goal(){
+    Sucks.Spin(100);
+    Sucks2.Spin(100);
+    Sucks3.Spin(-100);
+}
+
+void Sucks_Stop(){
+    Sucks.Stop();
+    Sucks2.Stop();
+    Sucks3.Stop();
+}

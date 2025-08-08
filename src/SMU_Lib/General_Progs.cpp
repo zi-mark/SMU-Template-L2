@@ -14,7 +14,8 @@ void Empty(){};
 
 void Test(){
     // DC_Sorting(1);
-    Auto[1].Funcs();
+    // Auto[1].Funcs();
+    Auto_Test();
 }
 
 int ProgramChoice = 0;

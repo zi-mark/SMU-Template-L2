@@ -1,4 +1,4 @@
-#define KL 3
+#define KL 5
 /*
 * Exam:
 * 1: 12345A
