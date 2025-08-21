@@ -67,6 +67,7 @@ using namespace vex;
 
     //惯性传感器(端口)
     optical CLSensor(PORT20);
+    ColorData  CLData = {30, 180, 200, 200};
 
     //电磁阀(三线接口)
     digital_out Hook(Brain.ThreeWirePort.A);

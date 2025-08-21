@@ -23,6 +23,7 @@ extern digital_out Hook;
 extern digital_out Tongue;
 extern digital_out Wing;
 extern digital_out Needle;
+extern digital_out Raise;
 
 extern optical CLSensor;
 extern ColorData CLData;

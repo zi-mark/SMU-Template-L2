@@ -1,4 +1,4 @@
-#define KL 5
+#define SF 1
 /*
 * Exam:
 * 1: 12345A
@@ -9,6 +9,8 @@
 * 3: Jie
 * 4: aoteman
 * 5: 61150W new
+* SF: 
+* 1:Yu
 */
 
 //单杆/双杆
