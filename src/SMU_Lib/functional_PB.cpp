@@ -53,7 +53,7 @@ void DC_Sorting(bool color, int red_offset, int blue_offset) {
 void Eat(){
     Sucks.Spin(100);
     Sucks2.Spin(100);
-    Sucks3.Spin(100);
+    Sucks3.Spin(50);
 }
 
 void Low_Goal(){

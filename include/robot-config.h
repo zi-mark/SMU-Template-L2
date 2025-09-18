@@ -22,6 +22,8 @@ extern int MotorGroupsCount;
 extern digital_out Hook;
 extern digital_out Tongue;
 extern digital_out Wing;
+extern digital_out LWing;
+extern digital_out RWing;
 extern digital_out Needle;
 extern digital_out Raise;
 
