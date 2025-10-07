@@ -9,13 +9,16 @@
 * 3: Jie
 * 4: aoteman
 * 5: 61150W new
-* 6: New Xiaowei Dai
+* 6: New Jie
+* 7: New Jiang
+* 8: New Yu
+* 9: New Xiao
 * SF: 
 * 1:Yu
 */
 
 //单杆/双杆
-#define DriversHabit 1
+#define DriversHabit 2
 
 //测试模式
 // #define Testing
