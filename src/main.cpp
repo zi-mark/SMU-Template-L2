@@ -47,39 +47,36 @@ competition Com;
 timer Auto_T;
 
 int main(){
+    
     Brain.Screen.clearScreen();
+
     #ifndef Testing
-    if(Com.isCompetitionSwitch() || Com.isFieldControl()){
-        Com.drivercontrol(DC);
-    }
-    ProgramChoosing();
-    Init();
-    if(Com.isCompetitionSwitch() || Com.isFieldControl()){
-        Com.autonomous(Auto[ProgramChoice].Funcs);
-        Con.Screen.print("Competition ");
-        Con.rumble("-");
-    }
-    else{
-        Con.Screen.print("Not Competition ");
-        Break();
-        Auto_T.reset();
-        Auto[ProgramChoice].Funcs();
-        Con.Screen.newLine();
-        Con.Screen.print(Auto_T.value());
-        DC();
-    }
+        if(Com.isCompetitionSwitch() || Com.isFieldControl()){
+            Com.drivercontrol(DC);
+        }
+        ProgramChoosing();
+        Init();
+        if(Com.isCompetitionSwitch() || Com.isFieldControl()){
+            Com.autonomous(Auto[ProgramChoice].Funcs);
+            Con.Screen.print("Competition ");
+            Con.rumble("-");
+        }
+        else{
+            Con.Screen.print("Not Competition ");
+            Break();
+            Auto_T.reset();
+            Auto[ProgramChoice].Funcs();
+            Con.Screen.newLine();
+            Con.Screen.print(Auto_T.value());
+            DC();
+        }
 
     #else
-    Init();
-    Con.Screen.print("Init Complete");
-    // while(!Con.ButtonA.pressing()) continue;
-    // Auto_T.reset();
+        Init();
+        Con.Screen.print("Init Complete");
 
-    Auto_Test();
+        Auto_Test();
 
-    // Con.Screen.newLine();
-    // Con.Screen.print(Auto_T.value());
-    DC();
     #endif
     
     while(1) wait(10,msec);
