@@ -6,6 +6,8 @@ void ProgramChoosing();
 void Break();
 
 void Auto_Test();
+void Empty();
+void Motor_Test();
 
 struct Autos{
     const char* name;
