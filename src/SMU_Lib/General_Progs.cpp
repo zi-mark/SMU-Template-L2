@@ -12,11 +12,7 @@ void Break(){
 
 void Empty(){};
 
-void Test(){
-    // DC_Sorting(1);
-    // Auto[1].Funcs();
-    Auto_Test();
-}
+void Test(){}
 
 int ProgramChoice = 0;
 //屏幕选程序

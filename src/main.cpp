@@ -55,14 +55,13 @@ int main(){
     ProgramChoosing();
     Init();
     if(Com.isCompetitionSwitch() || Com.isFieldControl()){
-        // Com.drivercontrol(DC);
         Com.autonomous(Auto[ProgramChoice].Funcs);
         Con.Screen.print("Competition ");
         Con.rumble("-");
     }
     else{
         Con.Screen.print("Not Competition ");
-        while(!Con.ButtonA.pressing()) continue;
+        Break();
         Auto_T.reset();
         Auto[ProgramChoice].Funcs();
         Con.Screen.newLine();
