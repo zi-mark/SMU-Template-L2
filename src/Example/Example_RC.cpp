@@ -20,8 +20,8 @@ using namespace vex;
 
     //推荐进行马达组包装，这样方便MotorTest检查机械结构。
     //马达组名(马达数组，马达数量，马达组名字);
-    MotorGroup Left_Motor_Group(Left_Motors, 3, "LMs");
-    MotorGroup Right_Motor_Group(Right_Motors, 3, "RMs");
+    MotorGroup Left_Motor_Group(Left_Motors, sizeof(Left_Motors), "LMs");
+    MotorGroup Right_Motor_Group(Right_Motors, sizeof(Right_Motors), "RMs");
 
     inertial GR(PORT21);
 
@@ -48,19 +48,19 @@ using namespace vex;
     // motor Lift(PORT10, ratio36_1, 0);
 
     motor Lift_Motors[] = {LiftL, LiftR};
-    MotorGroup Lifts(Lift_Motors, 2, "Lifts");
+    MotorGroup Lifts(Lift_Motors, sizeof(Lift_Motors), "Lifts");
 
     motor Suck(PORT20, ratio6_1, 1);
     motor Suck2(PORT11, ratio6_1, 1);
 
     motor Suck_Motors[] = {Suck};
-    MotorGroup Sucks(Suck_Motors, 1, "Sucks");
+    MotorGroup Sucks(Suck_Motors, sizeof(Suck_Motors), "Sucks");
 
     motor Suck_Motors2[] = {Suck2};
-    MotorGroup Sucks2(Suck_Motors2, 1, "Sucks2");
+    MotorGroup Sucks2(Suck_Motors2, sizeof(Suck_Motors2), "Sucks2");
 
     MotorGroup MotorGroups[] = {Left_Motor_Group, Right_Motor_Group, Lifts, Sucks, Sucks2};
-    int MotorGroupsCount = 5;
+    int MotorGroupsCount = sizeof(MotorGroups) / sizeof(MotorGroup);
 
     //惯性传感器(端口)
     optical CLSensor(PORT20);
