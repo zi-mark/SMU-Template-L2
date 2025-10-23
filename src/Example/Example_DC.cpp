@@ -3,14 +3,15 @@
 #include "robot-config.h"
 #include "SMU_Lib/chasis.h"
 #include "SMU_Lib/functional.h"
+#include "SMU_Lib/pressurebutton.h"
 
 #ifdef Exam
     #if Exam == 1
     void DC(){
         int lv, rv;
-        // bool save;
         Stop(coast);
         Brain.Screen.clearScreen(black);
+        PressureButton Abtn(Con.ButtonA);
         while(1){
 
             #if DriversHabit == 1
@@ -27,9 +28,21 @@
             if(abs(rv) < 5) rv = 0;
             SpinLR(lv, rv);
 
+            if(Abtn.JustPressed()){Hook.set(!Hook.value());}
+            //单个按键控制气缸开关写法
+
+            if(Con.ButtonX.pressing()) Hook.set(1);
+            else if(Con.ButtonB.pressing()) Hook.set(0);
+            //两个按键控制气缸开关写法
+
+            if(Con.ButtonL1.pressing()) Sucks.Spin(100);
+            else if(Con.ButtonL2.pressing()) Sucks.Spin(-100);
+            else Sucks.Stop();
+            //左右肩键控制吸盘正反转及停止
+
         }
     }
-    #else
+    #else//默认的手动函数，防止突然想测新机器的时候报错
     void DC(){
         int lv, rv;
         bool save;

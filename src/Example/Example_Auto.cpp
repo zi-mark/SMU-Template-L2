@@ -34,9 +34,11 @@
         void BL3(){}
         void Skills(){}
     #endif
-
+    /*
+    如果不需要用到这么多自动，则可以注释或者删除掉Auto里头对应的行
+    Auto内的元素分别是：{"打印到遥控器屏幕的自动名称", 自动函数, 所在颜色}
+    */
     //自动函数与函数名链接
-    int MaxChoice = 16; 
     Autos Auto[]{
         {"DC ", Empty, 1},//默认第一个是手动
         {"RR ", RR, 1}, 
@@ -55,6 +57,8 @@
         {"AT", Auto_Test, 1},
         {"MT ", Motor_Test, 1}
     };
+    int MaxChoice = sizeof(Auto)/sizeof(Auto[0]); 
+
 
 #endif
 

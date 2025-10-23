@@ -18,13 +18,10 @@ using namespace vex;
     motor Left_Motors[] = {L1, L2, L3};
     motor Right_Motors[] = {R1, R2, R3};
 
+    //推荐进行马达组包装，这样方便MotorTest检查机械结构。
+    //马达组名(马达数组，马达数量，马达组名字);
     MotorGroup Left_Motor_Group(Left_Motors, 3, "LMs");
     MotorGroup Right_Motor_Group(Right_Motors, 3, "RMs");
-
-    //轮子半径和齿轮比 马达齿/轮子齿
-    double WheelRadius = 1.375;
-    double ChasisRatio = 1;
-    double ChasisWidth = 7.5;
 
     inertial GR(PORT21);
 
@@ -33,10 +30,10 @@ using namespace vex;
         Right_Motors,// 右侧马达组
         &GR,// 惯性传感器
         &Brain.Screen,// 显示屏
-        3,// 轮子数量
-        WheelRadius,// 轮子半径
-        ChasisRatio,// 齿轮比 马达/轮子齿
-        ChasisWidth,// 车身宽度
+        3,// 马达数量
+        1.375,// 轮子半径
+        36/48.0,// 齿轮比 马达/轮子齿
+        7.5,// 车身宽度
         {0.5, 10.0, 0.5}, // PMG: kp, ki, kd
         {0.5, 10.0, 0.5}, // PMT: kp, ki, kd
         {0.5, 10.0, 0.5}, // PMDT: kp, ki, kd
@@ -67,7 +64,8 @@ using namespace vex;
 
     //惯性传感器(端口)
     optical CLSensor(PORT20);
-    ColorData  CLData = {30, 180, 200, 200};
+    //(红色阈值，蓝色阈值，对的等待时间，错的等待时间，灯光强度)
+    ColorData  CLData = {30, 180, 200, 200, 100};
 
     //电磁阀(三线接口)
     digital_out Hook(Brain.ThreeWirePort.A);
