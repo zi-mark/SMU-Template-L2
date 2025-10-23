@@ -30,7 +30,7 @@ using namespace vex;
         Right_Motors,// 右侧马达组
         &GR,// 惯性传感器
         &Brain.Screen,// 显示屏
-        3,// 马达数量
+        sizeof(Left_Motors),// 马达数量
         1.375,// 轮子半径
         36/48.0,// 齿轮比 马达/轮子齿
         7.5,// 车身宽度
