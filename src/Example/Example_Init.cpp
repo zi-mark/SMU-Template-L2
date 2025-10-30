@@ -5,6 +5,7 @@
 
 #ifdef Exam
     #if Exam == 1
+    //初始化函数，插上场控后到自动开始前执行，不能执行有关马达运动和遥控器按键运动的代码
     void Init(){
         
         CH.GR->calibrate();

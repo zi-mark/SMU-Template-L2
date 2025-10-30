@@ -57,7 +57,7 @@
         {"AT", Auto_Test, 1},
         {"MT ", Motor_Test, 1}
     };
-    int MaxChoice = sizeof(Auto)/sizeof(Auto[0]); 
+    int MaxChoice = sizeof(Auto) / sizeof(Auto[0]);
 
 
 #endif

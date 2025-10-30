@@ -1,3 +1,5 @@
+//最重要的头文件！！！
+//定义使用哪套机器的配置
 #define Exam 1
 /*
 * Exam:
@@ -17,9 +19,9 @@
 * 1:Yu
 */
 
-//单杆/双杆
-#define DriversHabit 2
+// 单杆/双杆
+#define DriversHabit 1
 
-//测试模式
+// 测试模式-主要用来测试自动算法参数
 // #define Testing
 

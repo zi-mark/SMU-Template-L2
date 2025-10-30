@@ -20,8 +20,8 @@ using namespace vex;
 
     //推荐进行马达组包装，这样方便MotorTest检查机械结构。
     //马达组名(马达数组，马达数量，马达组名字);
-    MotorGroup Left_Motor_Group(Left_Motors, sizeof(Left_Motors), "LMs");
-    MotorGroup Right_Motor_Group(Right_Motors, sizeof(Right_Motors), "RMs");
+    MotorGroup Left_Motor_Group(Left_Motors, sizeof(Left_Motors) / sizeof(Left_Motors[0]), "LMs");
+    MotorGroup Right_Motor_Group(Right_Motors, sizeof(Right_Motors) / sizeof(Right_Motors[0]), "RMs");
 
     inertial GR(PORT21);
 
@@ -30,7 +30,7 @@ using namespace vex;
         Right_Motors,// 右侧马达组
         &GR,// 惯性传感器
         &Brain.Screen,// 显示屏
-        sizeof(Left_Motors),// 马达数量
+        Left_Motor_Group.Count(),// 马达数量
         1.375,// 轮子半径
         36/48.0,// 齿轮比 马达/轮子齿
         7.5,// 车身宽度
@@ -48,19 +48,19 @@ using namespace vex;
     // motor Lift(PORT10, ratio36_1, 0);
 
     motor Lift_Motors[] = {LiftL, LiftR};
-    MotorGroup Lifts(Lift_Motors, sizeof(Lift_Motors), "Lifts");
+    MotorGroup Lifts(Lift_Motors, sizeof(Lift_Motors) / sizeof(Lift_Motors[0]), "Lifts");
 
     motor Suck(PORT20, ratio6_1, 1);
     motor Suck2(PORT11, ratio6_1, 1);
 
     motor Suck_Motors[] = {Suck};
-    MotorGroup Sucks(Suck_Motors, sizeof(Suck_Motors), "Sucks");
+    MotorGroup Sucks(Suck_Motors, sizeof(Suck_Motors) / sizeof(Suck_Motors[0]), "Sucks");
 
     motor Suck_Motors2[] = {Suck2};
-    MotorGroup Sucks2(Suck_Motors2, sizeof(Suck_Motors2), "Sucks2");
+    MotorGroup Sucks2(Suck_Motors2, sizeof(Suck_Motors2) / sizeof(Suck_Motors2[0]), "Sucks2");
 
     MotorGroup MotorGroups[] = {Left_Motor_Group, Right_Motor_Group, Lifts, Sucks, Sucks2};
-    int MotorGroupsCount = sizeof(MotorGroups) / sizeof(MotorGroup);
+    int MotorGroupsCount = sizeof(MotorGroups) / sizeof(MotorGroups[0]);
 
     //惯性传感器(端口)
     optical CLSensor(PORT20);
