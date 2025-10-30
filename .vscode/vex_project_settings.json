@@ -4,9 +4,9 @@
 		"json": 2
 	},
 	"project": {
-		"name": "SMU_Template",
-		"description": "A V5RC Template Developed by Mark Ma",
-		"creationDate": "Wed, 21 May 2025 12:41:26 GMT",
+		"name": "SMU_Template-L2",
+		"description": "A V5RC Template Developed by Mark Ma\n10/23/2025",
+		"creationDate": "Thu, 23 Oct 2025 07:10:19 GMT",
 		"platform": "V5",
 		"language": "cpp",
 		"slot": 1,

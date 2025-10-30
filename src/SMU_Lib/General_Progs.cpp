@@ -12,9 +12,7 @@ void Break(){
 
 void Empty(){};
 
-void Test(){
-    Auto_Sorting(1);
-}
+void Test(){}
 
 int ProgramChoice = 0;
 //屏幕选程序

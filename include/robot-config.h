@@ -1,5 +1,6 @@
 #include "vex.h"
 #include "SMU_Lib/motor_group.h"
+#include "SMU_Lib/functional.h"
 #include "SMU_Lib/chasis.h"
 
 
@@ -11,6 +12,7 @@ extern competition Com;
 
 extern MotorGroup Sucks;
 extern MotorGroup Sucks2;
+extern MotorGroup Sucks3;
 
 extern MotorGroup Lifts;
 
@@ -19,7 +21,13 @@ extern int MotorGroupsCount;
 
 extern digital_out Hook;
 extern digital_out Tongue;
+extern digital_out Wing;
+extern digital_out LWing;
+extern digital_out RWing;
+extern digital_out Needle;
+extern digital_out Raise;
 
 extern optical CLSensor;
+extern ColorData CLData;
 
 extern thread CL;
