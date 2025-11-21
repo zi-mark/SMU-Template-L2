@@ -1,5 +1,6 @@
 #include "SMU_Lib/functional.h"
 #include "robot-config.h"
+#include "SMU_Lib/autonomous.h"
 
 void DC_Sorting(bool color, int red_offset, int blue_offset) {
     while(1){
@@ -50,10 +51,37 @@ void DC_Sorting(bool color, int red_offset, int blue_offset) {
     } 
 }
 
+void CL_Eat(){
+    if(Auto[ProgramChoice].color){
+        if(CLSensor.hue() > CLData.blue_offset){
+            Sucks.Spin(100);
+            Sucks2.Spin(-100);
+            Sucks3.Spin(100);
+        }
+        else{
+            Sucks.Spin(100);
+            Sucks2.Spin(100);
+            Sucks3.Spin(100);
+        }
+    }
+    else{
+        if(CLSensor.hue() < CLData.red_offset){
+            Sucks.Spin(100);
+            Sucks2.Spin(-100);
+            Sucks3.Spin(100);
+        }
+        else{
+            Sucks.Spin(100);
+            Sucks2.Spin(100);
+            Sucks3.Spin(100);
+        }
+    }
+}
+
 void Eat(){
-    Sucks.Spin(100);
-    Sucks2.Spin(100);
-    Sucks3.Spin(100);
+        Sucks.Spin(100);
+        Sucks2.Spin(100);
+        Sucks3.Spin(100);
 }
 
 void Low_Goal(){
@@ -72,6 +100,33 @@ void Long_Goal(){
     Sucks.Spin(100);
     Sucks2.Spin(100);
     Sucks3.Spin(-100);
+}
+
+void CL_Long_Goal(){
+    if(Auto[ProgramChoice].color){
+        if(CLSensor.hue() > CLData.blue_offset){
+            Sucks.Spin(100);
+            Sucks2.Spin(-100);
+            Sucks3.Spin(-100);
+        }
+        else{
+            Sucks.Spin(100);
+            Sucks2.Spin(100);
+            Sucks3.Spin(-100);
+        }
+    }
+    else{
+        if(CLSensor.hue() < CLData.red_offset){
+            Sucks.Spin(100);
+            Sucks2.Spin(-100);
+            Sucks3.Spin(-100);
+        }
+        else{
+            Sucks.Spin(100);
+            Sucks2.Spin(100);
+            Sucks3.Spin(-100);
+        }
+    }
 }
 
 void Sucks_Stop(){

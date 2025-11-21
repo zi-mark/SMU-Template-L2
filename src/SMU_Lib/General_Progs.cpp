@@ -12,7 +12,14 @@ void Break(){
 
 void Empty(){};
 
-void Test(){}
+void Test(){
+    if(Brain.SDcard.isInserted()){
+        printf("SDcard is Insert\n");
+        uint8_t testInt = 1;
+        Brain.SDcard.appendfile("Test.txt", &testInt, 100);
+
+    }
+}
 
 int ProgramChoice = 0;
 //屏幕选程序

@@ -3,7 +3,7 @@
 #include "robot-config.h"
 #include "SMU_Lib/chasis.h"
 #include "SMU_Lib/functional.h"
-#include "SMU_Lib/pressurebutton.h"
+#include "SMU_Lib/PressureButton.h"
 
 #ifdef Exam
     #if Exam == 1
