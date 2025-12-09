@@ -1,6 +1,6 @@
 #include "SMU_Lib/autonomous.h"
 #include "definer.h"
-#include "SMU_Lib/chasis.h"
+#include "SMU_Lib/chassis.h"
 #include "SMU_Lib/functional.h"
 
 #ifdef Exam

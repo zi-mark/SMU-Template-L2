@@ -1,4 +1,4 @@
-#include "SMU_Lib/chasis.h" 
+#include "SMU_Lib/chassis.h" 
 #include "SMU_Lib/motor_group.h"
 
 void SpinLR(double leftSpeed, double rightSpeed, velocityUnits units){

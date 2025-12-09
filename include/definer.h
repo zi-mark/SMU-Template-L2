@@ -1,6 +1,6 @@
 //最重要的头文件！！！
 //定义使用哪套机器的配置
-#define KL 7
+#define CSTU 1
 /*
 * Exam:
 * 1: 12345A
@@ -20,7 +20,7 @@
 */
 
 // 单杆/双杆
-#define DriversHabit 2
+#define DriversHabit 1
 
 // 测试模式-主要用来测试自动算法参数
 // #define Testing
