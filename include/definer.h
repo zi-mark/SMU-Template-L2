@@ -1,6 +1,6 @@
 //最重要的头文件！！！
 //定义使用哪套机器的配置
-#define CSTU 1
+#define CSTU 2
 /*
 * Exam:
 * 1: 12345A
