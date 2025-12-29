@@ -17,6 +17,9 @@
 * 9: New Xiao
 * SF: 
 * 1:Yu
+* CSTU:
+* 1: Gen1
+* 2: Gen2
 */
 
 // 单杆/双杆

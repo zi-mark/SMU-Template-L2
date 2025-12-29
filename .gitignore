@@ -5,4 +5,5 @@
 /src/SF
 /src/SMU
 /src/CSTU
+/include/definer.h
 compile_commands.json
