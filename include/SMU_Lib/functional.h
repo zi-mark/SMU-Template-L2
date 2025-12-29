@@ -7,13 +7,13 @@ struct ColorData {
     double false_duration;
     int light_power;
 };
-extern void DC_Sorting(bool color);
-extern void Auto_Sorting(bool color);
+// extern void DC_Sorting(bool color);
+// extern void Auto_Sorting(bool color);
 
-extern void Eat();
-extern void CL_Eat();
-extern void Low_Goal();
-extern void High_Goal();
-extern void Long_Goal();
-extern void CL_Long_Goal();
-extern void Sucks_Stop();
+// extern void Eat();
+// extern void CL_Eat();
+// extern void Low_Goal();
+// extern void High_Goal();
+// extern void Long_Goal();
+// extern void CL_Long_Goal();
+// extern void Sucks_Stop();

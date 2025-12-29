@@ -151,6 +151,31 @@ void PMGo(double target){
     Stop(hold);
 }
 
+void PMGo_Adj(double target){
+    ResetPosition();
+    double error, v;
+    target = target * 360 / (2 * Pi * CH.WheelRadius * CH.ChasisRatio);
+    double str_rotation = CH.GR->rotation();
+    while(1){
+        error = target - AveragePosition(deg);
+        if(fabs(error) < CH.PMG.offset) break;
+        v = CH.PMG.kp * error;
+        if(v < -CH.PMG.vmin || v > CH.PMG.vmin){
+            SpinLR(v - 10 * (CH.GR->rotation() - str_rotation), v + 10 * (CH.GR->rotation() - str_rotation), dps);
+            CH.Scn->clearScreen(red);
+        }
+        else if(v > 0){
+            SpinLR(CH.PMG.vmin, CH.PMG.vmin, dps);
+            CH.Scn->clearScreen(blue);
+        }
+        else{
+            SpinLR(-CH.PMG.vmin, -CH.PMG.vmin, dps);
+            CH.Scn->clearScreen(green);
+        }
+    }
+    Stop(hold);
+}
+
 //PM差速转
 void PMDTurnTo(double rtn, double r){
     double error, cv, rv, lv;
