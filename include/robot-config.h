@@ -1,7 +1,7 @@
 #include "vex.h"
 #include "SMU_Lib/motor_group.h"
 #include "SMU_Lib/functional.h"
-#include "SMU_Lib/chasis.h"
+#include "SMU_Lib/chassis.h"
 
 
 using namespace vex;
