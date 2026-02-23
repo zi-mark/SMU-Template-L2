@@ -53,6 +53,8 @@ void PMTurnTo(double target);
 void PMTurnFor(double target);
 void PMDTurnTo(double rtn, double r);
 void PMDTurnFor(double rtn, double r);
+void PMLSwingTo(double target);
+void PMRSwingTo(double target);
 void PMGo(double target);
 
 void PIDTurnTo(double target);

@@ -29,5 +29,6 @@ extern digital_out Raise;
 
 extern optical CLSensor;
 extern ColorData CLData;
+extern distance Dis;
 
 extern thread CL;

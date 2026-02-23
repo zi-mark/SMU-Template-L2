@@ -126,6 +126,50 @@ void PMTurnFor(double target){
     Stop(hold);
 }
 
+void PMLSwingTo(double target){
+    double error, v;
+    while(1){
+        error = target - CH.GR->rotation();
+        if (fabs(error) <= CH.PMT.offset) break;
+        v = CH.PMT.kp * error;
+        if(v < -CH.PMT.vmin || v > CH.PMT.vmin){
+            SpinLR(v, 0, dps);
+            CH.Scn->clearScreen(red);
+        }
+        else if(v < 0){
+            SpinLR(-CH.PMT.vmin, 0, dps);
+            CH.Scn->clearScreen(green);
+        }
+        else{
+            SpinLR(CH.PMT.vmin, 0, dps);
+            CH.Scn->clearScreen(blue);
+        }
+    }
+    Stop(brake);
+}
+
+void PMRSwingTo(double target){
+    double error, v;
+    while(1){
+        error = target - CH.GR->rotation();
+        if (fabs(error) <= CH.PMT.offset) break;
+        v = CH.PMT.kp * error;
+        if(v < -CH.PMT.vmin || v > CH.PMT.vmin){
+            SpinLR(0, -v, dps);
+            CH.Scn->clearScreen(red);
+        }
+        else if(v < 0){
+            SpinLR(0, -CH.PMT.vmin, dps);
+            CH.Scn->clearScreen(green);
+        }
+        else{
+            SpinLR(0, CH.PMT.vmin, dps);
+            CH.Scn->clearScreen(blue);
+        }
+    }
+    Stop(brake);
+}
+
 //PM直走
 void PMGo(double target){
     ResetPosition();
