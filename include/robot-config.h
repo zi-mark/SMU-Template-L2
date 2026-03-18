@@ -15,6 +15,7 @@ extern MotorGroup Sucks2;
 extern MotorGroup Sucks3;
 
 extern MotorGroup Lifts;
+extern MotorGroup Levers;
 
 extern MotorGroup MotorGroups[];
 extern int MotorGroupsCount;
@@ -26,6 +27,7 @@ extern digital_out LWing;
 extern digital_out RWing;
 extern digital_out Needle;
 extern digital_out Raise;
+extern digital_out Cap;
 
 extern optical CLSensor;
 extern ColorData CLData;
