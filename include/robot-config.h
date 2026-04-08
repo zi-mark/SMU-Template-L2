@@ -2,6 +2,7 @@
 #include "SMU_Lib/motor_group.h"
 #include "SMU_Lib/functional.h"
 #include "SMU_Lib/chassis.h"
+#include "SMU_Lib/calculator.h"
 
 
 using namespace vex;

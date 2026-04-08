@@ -18,8 +18,10 @@ class MotorGroup {
     void Stop(vex::brakeType brakeType = vex::brakeType::hold);
     void ResetPosition();
     double AveragePosition(vex::rotationUnits units =  vex::rotationUnits::deg);
+    double AverageVelocity(vex::velocityUnits units = vex::velocityUnits::pct);
     bool isDone();
     void Spin_T(double t, double speed, vex::velocityUnits velUnits = vex::velocityUnits::pct);
     void SpinFor(double rotation, vex::rotationUnits units = vex::rotationUnits::deg, double speed = 80, vex::velocityUnits velUnits = vex::velocityUnits::pct, bool wait = true);
+    void SetMaxTourque(double torque);
 
 };

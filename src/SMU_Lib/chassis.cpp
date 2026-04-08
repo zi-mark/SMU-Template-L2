@@ -52,7 +52,7 @@ void Go(double target, double v, velocityUnits vu){
             }
         }
         if(done) break;
-        task::sleep(1);
+        task::sleep(10);
     }
 
 }
@@ -73,7 +73,7 @@ void TurnFor(double target, double v, velocityUnits vu){
             }
         }
         if(done) break;
-        task::sleep(1);
+        task::sleep(10);
     }
     Stop(hold);
 }
@@ -82,22 +82,24 @@ void TurnFor(double target, double v, velocityUnits vu){
 //PM转绝对角度
 void PMTurnTo(double target){
     double error, v;
+    int statu = 0;
     while(1){
         error = target - CH.GR->rotation();
         if (fabs(error) <= CH.PMT.offset) break;
         v = CH.PMT.kp * error;
         if(v < -CH.PMT.vmin || v > CH.PMT.vmin){
             SpinLR(v, -v, dps);
-            CH.Scn->clearScreen(red);
+            if(statu != 0) CH.Scn->clearScreen(red), statu = 0;
         }
         else if(v < 0){
             SpinLR(-CH.PMT.vmin, CH.PMT.vmin, dps);
-            CH.Scn->clearScreen(green);
+            if(statu != 1) CH.Scn->clearScreen(green), statu = 1;
         }
         else{
             SpinLR(CH.PMT.vmin, -CH.PMT.vmin, dps);
-            CH.Scn->clearScreen(blue);
+            if(statu != 2) CH.Scn->clearScreen(blue), statu = 2;
         }
+        task::sleep(10);
     }
     Stop(hold);
 }
@@ -122,6 +124,7 @@ void PMTurnFor(double target){
             SpinLR(CH.PMT.vmin, -CH.PMT.vmin, dps);
             CH.Scn->clearScreen(blue);
         }
+        task::sleep(10);
     }
     Stop(hold);
 }
@@ -144,6 +147,7 @@ void PMLSwingTo(double target){
             SpinLR(CH.PMT.vmin, 0, dps);
             CH.Scn->clearScreen(blue);
         }
+        task::sleep(10);
     }
     Stop(brake);
 }
@@ -166,6 +170,7 @@ void PMRSwingTo(double target){
             SpinLR(0, CH.PMT.vmin, dps);
             CH.Scn->clearScreen(blue);
         }
+        task::sleep(10);
     }
     Stop(brake);
 }
@@ -191,6 +196,7 @@ void PMGo(double target){
             SpinLR(-CH.PMG.vmin, -CH.PMG.vmin, dps);
             CH.Scn->clearScreen(green);
         }
+        task::sleep(10);
     }
     Stop(hold);
 }
@@ -216,6 +222,7 @@ void PMGo_Adj(double target){
             SpinLR(-CH.PMG.vmin, -CH.PMG.vmin, dps);
             CH.Scn->clearScreen(green);
         }
+        task::sleep(10);
     }
     Stop(hold);
 }

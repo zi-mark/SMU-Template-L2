@@ -1,4 +1,5 @@
 #include "SMU_Lib/motor_group.h"
+#include "SMU_Lib/calculator.h"
 
 #define Pi 3.14159265358979323846
 

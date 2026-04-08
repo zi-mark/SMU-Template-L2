@@ -36,6 +36,14 @@ double MotorGroup::AveragePosition(vex::rotationUnits units) {
     return positionSum / motorCount;
 }
 
+double MotorGroup::AverageVelocity(vex::velocityUnits units) {
+    double velocitySum = 0.0;
+    for (int i = 0; i < motorCount; i++) {
+        velocitySum += motorGroup[i].velocity(units);
+    }
+    return velocitySum / motorCount;
+}
+
 void MotorGroup::Spin_T(double t, double speed, vex::velocityUnits velUnits) {
     for (int i = 0; i < motorCount; i++) {
         motorGroup[i].spin(fwd, speed, velUnits);
@@ -61,6 +69,12 @@ void MotorGroup::SpinFor(double rotation, vex::rotationUnits units, double speed
         while(!isDone()) {
             task::sleep(10); 
         }
+    }
+}
+
+void MotorGroup::SetMaxTourque(double torque) {
+    for (int i = 0; i < motorCount; i++) {
+        motorGroup[i].setMaxTorque(torque, percentUnits::pct);
     }
 }
 
